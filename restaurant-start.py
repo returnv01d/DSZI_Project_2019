@@ -15,6 +15,18 @@ pygame.display.set_caption('Restaurant')
 
 all_sprites_list = pygame.sprite.Group()
 
-elsa = Waiter(0,0, WINDOW_WIDTH, WINDOW_HEIGHT)
+#set up barriers and add to all_sprites_list
+barriers = []
 
+for barrier in barriers:
+    all_sprites_list.add(barrier)
+
+#set up current orders- IDK for now how we'll set if officialy
+currentOrders = [1,2,3,4]
+
+#set up waiter, for now left top corner
+waiter = Waiter(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, barriers, currentOrders)
+all_sprites_list.add(waiter)
+
+#just a control print ;)
 print("hello in شروانشاه restaurant!!")
