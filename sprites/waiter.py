@@ -3,7 +3,7 @@
 import pygame
 
 class Waiter(pygame.sprite.Sprite):
-    def __init__(self, x, y, window_width, window_height, barriers, currentOrders):
+    def __init__(self, x, y, window_width, window_height, barriers, listOfOrders, currentOrders):
         pygame.sprite.Sprite.__init__(self)
 
         self.window_width = window_width
@@ -19,67 +19,71 @@ class Waiter(pygame.sprite.Sprite):
         self.step = 50
 
         self.barriers = barriers
-        
+        self.listOfOrders = listOfOrders
         self.currentOrders = currentOrders
+
+    def addToCurrentOrders(self, meal):
+        self.currentOrders.append(meal)
         
-            
-        def move_right(self):
-            if self.rect.x + self.rect.width + self.step <= self.window_width:
-                self.rect.x += self.step
-                collision = False
-                for barrier in self.barriers:
-                    if self.rect.colliderect(barrier.rect):
-                        self.rect.x -= self.step
-                        collision = True
-                        break
-                if collision:
-                    print("collision!")
-                else:
-                    print("no collision")
+    def removeFromCurrentOrders(self, meal):
+        self.currentOrders.remove(meal)
 
-        def move_left(self):
-            if self.rect.x >= self.step:
-                self.rect.x -= self.step
-                collision = False
-                for barrier in self.barriers:
-                    if self.rect.colliderect(barrier.rect):
-                        self.rect.x += self.step
-                        collision = True
-                        break
-                if collision:
-                    print("collision!")
-                else:
-                    print("no collision")
+    def move_right(self):
+        if self.rect.x + self.rect.width + self.step <= self.window_width:
+            self.rect.x += self.step
+            collision = False
+            for barrier in self.barriers:
+                if self.rect.colliderect(barrier.rect):
+                    self.rect.x -= self.step
+                    collision = True
+                    break
+            if collision:
+                print("collision!")
+            else:
+                print("no collision")
 
-        def move_down(self):
-            if self.rect.y + self.rect.height + self.step <= self.window_height:
-                self.rect.y += self.step
-                collision = False
-                for barrier in self.barriers:
-                    if self.rect.colliderect(barrier.rect):
-                        self.rect.y -= self.step
-                        collision = True
-                        break
-                if collision:
-                    print("collision!")
-                else:
-                    print("no collision")
+    def move_left(self):
+        if self.rect.x >= self.step:
+            self.rect.x -= self.step
+            collision = False
+            for barrier in self.barriers:
+                if self.rect.colliderect(barrier.rect):
+                    self.rect.x += self.step
+                    collision = True
+                    break
+            if collision:
+                print("collision!")
+            else:
+                print("no collision")
 
-        def move_up(self):
-            if self.rect.y >= self.step:
-                self.rect.y -= self.step
-                collision = False
-                for barrier in self.barriers:
-                    if self.rect.colliderect(barrier.rect):
-                        self.rect.y += self.step
-                        collision = True
-                        break
-                if collision:
-                    print("collision!")
-                else:
-                    print("no collision")
-                    
-        def reset(self):
-            self.rect.x = 0
-            self.rect.y = 0
+    def move_down(self):
+        if self.rect.y + self.rect.height + self.step <= self.window_height:
+            self.rect.y += self.step
+            collision = False
+            for barrier in self.barriers:
+                if self.rect.colliderect(barrier.rect):
+                    self.rect.y -= self.step
+                    collision = True
+                    break
+            if collision:
+                print("collision!")
+            else:
+                print("no collision")
 
+    def move_up(self):
+        if self.rect.y >= self.step:
+            self.rect.y -= self.step
+            collision = False
+            for barrier in self.barriers:
+                if self.rect.colliderect(barrier.rect):
+                    self.rect.y += self.step
+                    collision = True
+                    break
+            if collision:
+                print("collision!")
+            else:
+                print("no collision")
+
+    def reset(self):
+        self.rect.x = 0
+        self.rect.y = 0
