@@ -15,7 +15,7 @@ class Table(pygame.sprite.Sprite):
         self.id = id
         
         self.listOfOrders = []
-        self.recived_orders = []
+        self.received_orders = []
 
 
 
