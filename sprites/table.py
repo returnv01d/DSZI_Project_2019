@@ -5,15 +5,15 @@ import pygame, sys
 
 
 class Table(pygame.sprite.Sprite):
-    def __init__(self, x, y, id, listOfOrders, recived_orders):
+    id = 0
+    def __init__(self):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load("images/table.png")
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.id = id
-        
+
+        self.id = Table.id
+        Table.id += 1
         self.listOfOrders = []
         self.received_orders = []
 
