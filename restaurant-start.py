@@ -1,6 +1,6 @@
 import pygame
 import sys
-from utility.utility import Utility
+from model.board import Board
 from pygame.locals import *
 
 pygame.init()
@@ -17,22 +17,14 @@ DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load("images/background.png")
 pygame.display.set_caption('Restaurant')
 
-SPRITE_WIDTH = int(WINDOW_WIDTH / BOARD_SIZE)
-SPRITE_HEIGHT = int(WINDOW_HEIGHT / BOARD_SIZE)
-board = Utility.generate_board(BOARD_SIZE, SPRITE_WIDTH, SPRITE_HEIGHT)
-print(board)
+board = Board(BOARD_SIZE)
+board.generate_test_board()
+sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 
 #just a control print ;)
 print("hello in شروانشاه restaurant!!")
 
-sprites = pygame.sprite.Group()
-all_sprites = []
-all_objects = []
-for row in board:
-    all_objects.extend(row)
-all_sprites = [obj.sprite for obj in all_objects]
-for sprite in all_sprites:
-    sprites.add(sprite)
+
 
 while True: # the main game loop
     for event in pygame.event.get():
