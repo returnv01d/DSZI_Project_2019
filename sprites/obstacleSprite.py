@@ -1,17 +1,10 @@
-import pygame
+from sprites.basic_sprite import BasicSprite
 
-class ObstacleSprite(pygame.sprite.Sprite):
+
+class ObstacleSprite(BasicSprite):
     def __init__(self, width, height):
-        pygame.sprite.Sprite.__init__(self)
+        image_path = "images/flower.png"
+        BasicSprite.__init__(width, height, image_path)
 
-        self.image = pygame.image.load("images/flower.png")
-        self.rect = self.image.get_rect()
 
-        self.rect.width = width
-        self.rect.height = height
-        self.image = pygame.transform.scale(self.image, (width, height))
-
-    def draw(self, x, y):
-        self.rect.x = x
-        self.rect.y = y
 
