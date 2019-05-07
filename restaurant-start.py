@@ -10,7 +10,7 @@ fpsClock = pygame.time.Clock()
 
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
-BOARD_SIZE = 15
+BOARD_SIZE = 10
 
 # set up the window
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
