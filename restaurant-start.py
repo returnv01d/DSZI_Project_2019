@@ -2,6 +2,8 @@ import pygame
 import sys
 from model.board import Board
 from pygame.locals import *
+from utility import *
+from utility import utility
 
 pygame.init()
 
@@ -18,7 +20,7 @@ background_image = pygame.image.load("images/background.png")
 pygame.display.set_caption('Restaurant')
 
 board = Board(BOARD_SIZE)
-board.generate_test_board()
+print(board.generate_board())
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 
 #just a control print ;)

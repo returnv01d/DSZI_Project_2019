@@ -1,10 +1,4 @@
-import random
 import pygame.sprite
-from model.freeSpace import FreeSpace
-from model.table import Table
-from model.waiter import Waiter
-from model.obstacle import Obstacle
-from model.kitchen import Kitchen
 
 class Board:
     def __init__(self, board_size):
@@ -25,23 +19,21 @@ class Board:
             current_height += sprite_height
         return sprites
 
-    def generate_test_board(self):
-        for i in range(0, self.board_size):
+    def generate_board(self):
+        board = []
+        flag = 0
+        file = open("boards/board1.txt", "r")
+        for line in file:
+            fields = line.split(" ")
+            new_object = None
             row = []
-            for j in range(0, self.board_size):
-                new_object = None
-                if (i == int(self.board_size / 2) and j == int(self.board_size / 2)):
-                    new_object = Waiter()
-
-                elif (i == 0 and ((j == self.board_size - 1) or (j == self.board_size - 2))):
-                    new_object = Kitchen()
-                elif ((i + 8) % 12 == 0 and (j + 8) % 16 == 0):
-                    new_object = Table()
-                else:
-                    if (random.randint(0, 30) != 30):
-                        new_object = FreeSpace()
-                    else:
-                        new_object = Obstacle()
-                row.append(new_object)
-            self.objects.append(row)
-
+            if flag==0:
+                board_size=fields[0]
+                flag=1
+            else:
+                for j in range(0, int(board_size)):
+                    new_object = fields[j].strip()
+                    row.append(new_object)
+                board.append(row)
+        file.close()
+        return board
