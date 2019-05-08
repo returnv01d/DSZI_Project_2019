@@ -2,8 +2,6 @@ import pygame
 import sys
 from model.board import Board
 from pygame.locals import *
-from utility import *
-from utility import utility
 
 pygame.init()
 
@@ -16,7 +14,7 @@ BOARD_SIZE = 10
 
 # set up the window
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
-background_image = pygame.image.load("images/background.png")
+background_image = pygame.image.load("images/background2.png")
 pygame.display.set_caption('Restaurant')
 
 board = Board(BOARD_SIZE)
