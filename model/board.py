@@ -26,10 +26,11 @@ class Board:
             current_height += sprite_height
         return sprites
 
+
     def generate_board(self):
         board = []
         flag = 0
-        file = open("boards/board1.txt", "r")
+        file = open("boards/board2.txt", "r")
         for line in file:
             fields = line.split(" ")
             new_object = None
@@ -45,26 +46,21 @@ class Board:
         file.close()
         return board
 
-    def draw_board(self, board, sprite_width, sprite_height):
-        current_height = 0
-        newboard =[]
+    def draw_board(self):
+        generatedBoard = Board.generate_board(self)
         for i in range(0, 10):
             row = []
             for j in range(0, 10):
                 new_object = None
-                if (board[i][j] == 'F'):
+                if (generatedBoard[i][j] == 'F'):
                     new_object = FreeSpace()
-                elif (board[i][j] == 'W'):
+                elif (generatedBoard[i][j] == 'W'):
                     new_object = Waiter()
-                elif (board[i][j] == 'C'):
+                elif (generatedBoard[i][j] == 'C'):
                     new_object = Carpet()
-                elif (board[i][j] == 'T'):
+                elif (generatedBoard[i][j] == 'T'):
                     new_object = Table()
-                elif (board[i][j] == 'K'):
+                elif (generatedBoard[i][j] == 'K'):
                     new_object = Kitchen()
-                new_object.create_sprite(sprite_width, sprite_height)
-                new_object.sprite.draw(j * sprite_width, current_height)
                 row.append(new_object)
-            current_height += sprite_height
-            newboard.append(row)
-        return newboard
+            self.objects.append(row)

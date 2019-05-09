@@ -20,12 +20,8 @@ background_image = pygame.image.load("images/background.png")
 pygame.display.set_caption('Restaurant')
 
 board = Board(BOARD_SIZE)
-# print(board.generate_board())
-#board.draw_board((board.generate_board()), WINDOW_WIDTH, WINDOW_HEIGHT)
-print(board.generate_board(board.generate_board(), WINDOW_WIDTH, WINDOW_HEIGHT))
+board.draw_board()
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-
-#just a control print ;)
 print("hello in شروانشاه restaurant!!")
 
 
