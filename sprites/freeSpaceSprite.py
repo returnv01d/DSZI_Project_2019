@@ -4,7 +4,7 @@ class FreeSpaceSprite(pygame.sprite.Sprite):
     def __init__(self, width, height):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/floor1.png")
+        self.image = pygame.image.load("images/Empty.png")
         self.rect = self.image.get_rect()
 
         self.rect.width = width

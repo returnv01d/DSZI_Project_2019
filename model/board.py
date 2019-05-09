@@ -30,7 +30,7 @@ class Board:
     def generate_board(self):
         board = []
         flag = 0
-        file = open("boards/board2.txt", "r")
+        file = open("boards/board1.txt", "r")
         for line in file:
             fields = line.split(" ")
             new_object = None
@@ -64,3 +64,4 @@ class Board:
                     new_object = Kitchen()
                 row.append(new_object)
             self.objects.append(row)
+
