@@ -21,11 +21,8 @@ class Waiter:
         self.currentOrders.remove(meal)
 
     def update_sprite_position(self, delta_x, delta_y):
-        print("{0} self.sprite.rect.x, {1} self.sprite.rect.y".format(self.sprite.rect.x, self.sprite.rect.y))
         self.sprite.rect.x = self.sprite.rect.width * self.y
         self.sprite.rect.y = self.sprite.rect.height * self.x
-        print("{0} self.sprite.rect.x, {1} self.sprite.rect.y".format(self.sprite.rect.x, self.sprite.rect.y))
-
 
     def __repr__(self):
         return "Waiter"

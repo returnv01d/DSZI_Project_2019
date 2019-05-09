@@ -33,7 +33,6 @@ while True: # the main game loop
         if event.type == KEYDOWN:
             if event.key == K_UP:
                 board.move_waiter(Move.UP)
-                print("ups")
             if event.key == K_DOWN:
                 board.move_waiter(Move.DOWN)
             if event.key == K_RIGHT:
