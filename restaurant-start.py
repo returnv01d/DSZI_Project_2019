@@ -2,6 +2,7 @@ import pygame
 import sys
 from model.board import Board
 from pygame.locals import *
+from model.move import Move
 
 pygame.init()
 
@@ -21,7 +22,7 @@ board = Board(BOARD_SIZE)
 board.draw_board()
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
-
+# print(board.objects)
 
 
 while True: # the main game loop
@@ -29,6 +30,16 @@ while True: # the main game loop
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == KEYDOWN:
+            if event.key == K_UP:
+                board.move_waiter(Move.UP)
+                print("ups")
+            if event.key == K_DOWN:
+                board.move_waiter(Move.DOWN)
+            if event.key == K_RIGHT:
+                board.move_waiter(Move.RIGHT)
+            if event.key == K_LEFT:
+                board.move_waiter(Move.LEFT)
 
 
     DISPLAYSURF.blit(background_image, (0,0))
