@@ -8,8 +8,9 @@ from model.waiter import Waiter
 
 
 class Board:
-    def __init__(self, board_size):
+    def __init__(self, board_size, board_path):
         self.board_size = board_size
+        self.board_path = board_path
         self.objects = []
 
     def to_sprite_group(self, window_width, window_height):
@@ -30,7 +31,7 @@ class Board:
     def generate_board(self):
         board = []
         flag = 0
-        file = open("boards/board1.txt", "r")
+        file = open(self.board_path, "r")
         for line in file:
             fields = line.split(" ")
             new_object = None
@@ -39,7 +40,7 @@ class Board:
                 board_size=fields[0]
                 flag=1
             else:
-                for j in range(0, int(board_size)):
+                for j in range(0, self.board_size):
                     new_object = fields[j].strip()
                     row.append(new_object)
                 board.append(row)
@@ -48,9 +49,9 @@ class Board:
 
     def draw_board(self):
         generatedBoard = Board.generate_board(self)
-        for i in range(0, 10):
+        for i in range(0, self.board_size):
             row = []
-            for j in range(0, 10):
+            for j in range(0, self.board_size):
                 new_object = None
                 if (generatedBoard[i][j] == 'F'):
                     new_object = FreeSpace()
@@ -65,3 +66,10 @@ class Board:
                 row.append(new_object)
             self.objects.append(row)
 
+    def save_board(self, saved_board_path, board):
+        file = open(saved_board_path, "w")
+        for i in range(0, board.board_size):
+            for j in range(0, board.board_size):
+                file.write(str(board.objects[j][i]) + " ")
+            file.write("\n")
+        file.close()

@@ -11,18 +11,18 @@ fpsClock = pygame.time.Clock()
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 BOARD_SIZE = 10
+BOARD_PATH = "boards/board1.txt"
 
 # set up the window
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load("images/background2.png")
 pygame.display.set_caption('Restaurant')
 
-board = Board(BOARD_SIZE)
+board = Board(BOARD_SIZE, BOARD_PATH)
 board.draw_board()
+board.save_board("boards/saved_board.txt", board)
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
-
-
 
 while True: # the main game loop
     for event in pygame.event.get():
