@@ -7,7 +7,7 @@ class Waiter:
         self.step = 1
         self.barriers = []
         self.listOfOrders = []
-        self.currentOrders = []
+        self.heldOrders = []
         self.x = None
         self.y = None
 
@@ -15,10 +15,10 @@ class Waiter:
         self.sprite = WaiterSprite(width, height)
 
     def add_to_current_orders(self, meal):
-        self.currentOrders.append(meal)
+        self.heldOrders.append(meal)
 
     def remove_from_current_orders(self, meal):
-        self.currentOrders.remove(meal)
+        self.heldOrders.remove(meal)
 
     def update_sprite_position(self, delta_x, delta_y):
         self.sprite.rect.x = self.sprite.rect.width * self.y
