@@ -6,5 +6,3 @@ class CarpetSprite(BasicSprite):
         BasicSprite.__init__(self, width, height, image_path)
 
 
-
-

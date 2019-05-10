@@ -4,7 +4,7 @@ class BasicSprite(pygame.sprite.Sprite):
     def __init__(self, width, height, image_path):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load(image_path)
+        self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect()
 
         self.rect.width = width
