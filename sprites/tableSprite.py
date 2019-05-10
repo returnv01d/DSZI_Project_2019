@@ -13,6 +13,10 @@ class TableSprite(pygame.sprite.Sprite):
 
         self.image = pygame.transform.scale(self.image, (width, height))
 
+    def update_image(self):
+        self.image = pygame.image.load("images/table3.png")
+        self.image = pygame.transform.scale(self.image, (self.rect.width, self.rect.height))
+
     def draw(self, x, y):
         self.rect.x = x
         self.rect.y = y
