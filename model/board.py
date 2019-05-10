@@ -58,6 +58,7 @@ class Board:
             fields = line.split(" ")
             new_object = None
             row = []
+
             for j in range(0, board_size):
                 new_object = fields[j].strip()
                 row.append(new_object)
