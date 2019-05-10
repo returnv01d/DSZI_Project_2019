@@ -1,21 +1,10 @@
-import pygame
+from sprites.basic_sprite import BasicSprite
 
-class TableSprite(pygame.sprite.Sprite):
 
+class TableSprite(BasicSprite):
     def __init__(self, width, height):
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = pygame.image.load("images/table2.png")
-        self.rect = self.image.get_rect()
-
-        self.rect.width = width
-        self.rect.height = height
-
-        self.image = pygame.transform.scale(self.image, (width, height))
-
-    def draw(self, x, y):
-        self.rect.x = x
-        self.rect.y = y
+        image_path = "images/table2.png"
+        BasicSprite.__init__(self, width, height, image_path)
 
 
 

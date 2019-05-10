@@ -14,17 +14,18 @@ class Board:
         self.objects = []
         self.waiter = None
 
+
     def to_sprite_group(self, window_width, window_height):
+        sprites = pygame.sprite.Group()
         sprite_width = int(window_width / self.board_size)
         sprite_height = int(window_height / self.board_size)
 
-        sprites = pygame.sprite.Group()
         current_height = 0
 
-        for row in self.objects:
-            for j, obj in enumerate(row):
+        for y, row in enumerate(self.objects):
+            for x, obj in enumerate(row):
                 obj.create_sprite(sprite_width, sprite_height)
-                obj.sprite.draw(j * sprite_width, current_height)
+                obj.sprite.draw(x * sprite_width, current_height)
                 sprites.add(obj.sprite)
             current_height += sprite_height
         self.waiter.create_sprite(sprite_width, sprite_height)
@@ -49,6 +50,7 @@ class Board:
             fields = line.split(" ")
             new_object = None
             row = []
+
             for j in range(0, board_size):
                 new_object = fields[j].strip()
                 row.append(new_object)
@@ -97,8 +99,5 @@ class Board:
                 self.waiter.y += board_move_y
                 self.waiter.update_sprite_position(board_move_y, board_move_x)
                 # board.x is sprite.y because board.x means which row(height) we change.
-
-
-
 
 
