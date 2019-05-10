@@ -6,7 +6,7 @@ from model.kitchen import Kitchen
 from model.table import Table
 from model.waiter import Waiter
 from model.move import Move
-
+from model.order import Order
 
 class Board:
     def __init__(self, board_size):
@@ -42,6 +42,15 @@ class Board:
         y, x = map(lambda x: int(x), file.readline().split(" "))
         self.waiter = Waiter()
 
+        #for testing:
+        order1 = Order(0, 'bliny')
+        order2 = Order(1, 'schabowy')
+        order3 = Order(2, 'przepiorka')
+        self.waiter.listOfOrders.append(order1)
+        self.waiter.listOfOrders.append(order2)
+        self.waiter.listOfOrders.append(order3)
+        ###
+
         self.waiter.x = x
         self.waiter.y = y
 
@@ -75,6 +84,31 @@ class Board:
                 row.append(new_object)
             self.objects.append(row)
 
+
+    def take_dish(self):
+        if len(self.waiter.heldOrders) == 0 and len(self.waiter.listOfOrders) != 0:
+            # print(self.waiter.listOfOrders)
+            # print(self.waiter.heldOrders)
+
+            self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
+            self.waiter.listOfOrders.pop(0)
+            self.waiter.sprite.update_image_waiter(1)
+
+        elif len(self.waiter.heldOrders) == 1 and len(self.waiter.listOfOrders) != 0:
+            # print(self.waiter.listOfOrders)
+            # print(self.waiter.heldOrders)
+
+            self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
+            self.waiter.listOfOrders.pop(0)
+            self.waiter.sprite.update_image_waiter(2)
+
+    def put_dish_on_table(self, table_id, next_object):
+        for order in self.waiter.heldOrders:
+            if order.table_id == table_id:
+                self.waiter.heldOrders.remove(order)
+                self.waiter.sprite.update_image_waiter(len(self.waiter.heldOrders))
+                next_object.sprite.update_image()
+
     def move_waiter(self, move):
         board_move_x = 0
         board_move_y = 0
@@ -91,14 +125,17 @@ class Board:
         new_x = self.waiter.x + board_move_x
         new_y = self.waiter.y + board_move_y
 
+        next_object = self.objects[new_x][new_y]
+
         if new_x >= 0 and new_x < self.board_size and new_y >= 0 and new_y < self.board_size:
-            if self.objects[new_x][new_y].__class__.__name__ == Carpet.__name__:
+            if next_object.__class__.__name__ == Carpet.__name__:
                 self.waiter.x += board_move_x
                 self.waiter.y += board_move_y
                 self.waiter.update_sprite_position(board_move_y, board_move_x)
                 # board.x is sprite.y because board.x means which row(height) we change.
 
+            if next_object.__class__.__name__ == Kitchen.__name__:
+                self.take_dish()
 
-
-
-
+            if next_object.__class__.__name__ == Table.__name__:
+                self.put_dish_on_table(next_object.id, next_object)
