@@ -13,9 +13,9 @@ WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 BOARD_SIZE = 10
 
-# set up the window
+
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
-background_image = pygame.image.load("images/background2.png")
+background_image = pygame.image.load('images/background_image.png')
 pygame.display.set_caption('Restaurant')
 
 board = Board(BOARD_SIZE)
@@ -39,7 +39,6 @@ while True: # the main game loop
                 board.move_waiter(Move.RIGHT)
             if event.key == K_LEFT:
                 board.move_waiter(Move.LEFT)
-
 
     DISPLAYSURF.blit(background_image, (0,0))
     sprites.draw(DISPLAYSURF)

@@ -22,13 +22,13 @@ BOARD_SIZE = 15
 
 # set up the window
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-background_image = pygame.image.load("images/background.png").convert_alpha()
+background_image = pygame.image.load("images/background_image.png").convert_alpha()
 
 #background_image.set_alpha(255)
 pygame.display.set_caption('Restaurant')
 
-board = Board(BOARD_SIZE, 5, 5)
-board.generate_test_board()
+board = Board(BOARD_SIZE)
+board.draw_board()
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 #print(sprites.layers())
 #just a control print ;)
@@ -36,15 +36,11 @@ print("hello in شروانشاه restaurant!!")
 
 
 #sprites.draw(DISPLAYSURF),
-s = pygame.sprite.Group()
-k = Waiter()
-k.create_sprite(100,100)
-#k.sprite.draw(200,200)
-s.add(k.sprite)
+
 DISPLAYSURF.blit(background_image, (0,0))
-img = pygame.image.load('images/waiter.png').convert_alpha()
+
 new_object = Table()
-DISPLAYSURF.blit(img, img.get_rect())
+
 while True: # the main game loop
     for event in pygame.event.get():
         if event.type == QUIT:
