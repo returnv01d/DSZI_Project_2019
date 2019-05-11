@@ -9,9 +9,9 @@ from model.move import Move
 from model.order import Order
 
 class Board:
-    def __init__(self, board_size, board_path):
+    def __init__(self, board_size):
         self.board_size = board_size
-        self.board_path = board_path
+
         self.objects = []
         self.waiter = None
 
@@ -33,68 +33,6 @@ class Board:
         self.waiter.sprite.draw(self.waiter.y * sprite_width, self.waiter.x * sprite_height)
         sprites.add(self.waiter.sprite)
         return sprites
-
-
-    def generate_board(self):
-        board = []
-        flag = 0
-        file = open(self.board_path, "r")
-
-        board_size = int(file.readline())
-        y, x = map(lambda x: int(x), file.readline().split(" "))
-        self.waiter = Waiter()
-
-        #for testing:
-        order1 = Order(0, 'bliny')
-        order2 = Order(1, 'schabowy')
-        order3 = Order(2, 'przepiorka')
-        self.waiter.listOfOrders.append(order1)
-        self.waiter.listOfOrders.append(order2)
-        self.waiter.listOfOrders.append(order3)
-        ###
-
-        self.waiter.x = x
-        self.waiter.y = y
-
-        for line in file:
-            fields = line.split(" ")
-            new_object = None
-            row = []
-
-            for j in range(0, board_size):
-                new_object = fields[j].strip()
-                row.append(new_object)
-            board.append(row)
-
-        file.close()
-        return board
-
-    def draw_board(self):
-        generatedBoard = Board.generate_board(self)
-        for i in range(0, self.board_size):
-            row = []
-            for j in range(0, self.board_size):
-                new_object = None
-                if (generatedBoard[i][j] == 'F'):
-                    new_object = FreeSpace()
-                elif (generatedBoard[i][j] == 'W'):
-                    new_object = Carpet()
-                elif (generatedBoard[i][j] == 'C'):
-                    new_object = Carpet()
-                elif (generatedBoard[i][j] == 'T'):
-                    new_object = Table()
-                elif (generatedBoard[i][j] == 'K'):
-                    new_object = Kitchen()
-                row.append(new_object)
-            self.objects.append(row)
-
-    def save_board(self, saved_board_path, board):
-        file = open(saved_board_path, "w")
-        for i in range(0, board.board_size):
-            for j in range(0, board.board_size):
-                file.write(str(board.objects[j][i]) + " ")
-            file.write("\n")
-        file.close()
 
     def take_dish(self):
         if len(self.waiter.heldOrders) == 0 and len(self.waiter.listOfOrders) != 0:
