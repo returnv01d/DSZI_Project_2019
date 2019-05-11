@@ -7,17 +7,22 @@ class Waiter:
         self.step = 1
         self.barriers = []
         self.listOfOrders = []
-        self.currentOrders = []
+        self.heldOrders = []
+        self.x = None
+        self.y = None
 
     def create_sprite(self, width, height):
         self.sprite = WaiterSprite(width, height)
 
-    def addToCurrentOrders(self, meal):
-        self.currentOrders.append(meal)
+    def add_to_current_orders(self, meal):
+        self.heldOrders.append(meal)
 
+    def remove_from_current_orders(self, meal):
+        self.heldOrders.remove(meal)
 
-    def removeFromCurrentOrders(self, meal):
-        self.currentOrders.remove(meal)
+    def update_sprite_position(self, delta_x, delta_y):
+        self.sprite.rect.x = self.sprite.rect.width * self.y
+        self.sprite.rect.y = self.sprite.rect.height * self.x
 
     def __repr__(self):
         return "Waiter"
