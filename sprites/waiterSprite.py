@@ -1,5 +1,5 @@
 from sprites.basic_sprite import BasicSprite
-
+import pygame
 
 class WaiterSprite(BasicSprite):
     def __init__(self, width, height):
@@ -7,7 +7,7 @@ class WaiterSprite(BasicSprite):
         BasicSprite.__init__(self, width, height, image_path)
 
 
-  def update_image_waiter(self, number_of_meals):
+    def update_image_waiter(self, number_of_meals):
         if number_of_meals == 0:
             self.image = pygame.image.load("images/waiter_none.png")
         elif number_of_meals == 1:
