@@ -1,13 +1,13 @@
 import pygame
 import sys
 from model.board import Board
-from serialization.BoardToJson import BoardToJson
 from model.waiter import Waiter
 from model.table import Table
 from model.carpet import Carpet
 from model.kitchen import Kitchen
-from model.freeSpace import FreeSpaceSprite
-import model
+from model.freeSpace import FreeSpaceSprite, FreeSpace
+from serialization.board_saver import BoardSaver
+from serialization.board_loader import BoardLoader
 from sprites.tableSprite import TableSprite
 from pygame.locals import *
 
@@ -27,15 +27,12 @@ background_image = pygame.image.load("images/background_image.png").convert_alph
 #background_image.set_alpha(255)
 pygame.display.set_caption('Restaurant')
 
-board = Board(BOARD_SIZE)
-board.draw_board()
+board = BoardLoader.load_board_from_file('boards/board1.txt')
+
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-#print(sprites.layers())
+
 #just a control print ;)
 print("hello in شروانشاه restaurant!!")
-
-
-#sprites.draw(DISPLAYSURF),
 
 DISPLAYSURF.blit(background_image, (0,0))
 
@@ -47,13 +44,17 @@ while True: # the main game loop
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_s:
-                print("s")
+            if event.key == pygame.K_t:
                 new_object = Table()
             elif event.key == pygame.K_k:
                 new_object = Kitchen()
-            elif event.key == pygame.K_d:
+            elif event.key == pygame.K_c:
                 new_object = Carpet()
+            elif event.key == pygame.K_f:
+                new_object = FreeSpace()
+            elif event.key == pygame.K_s:
+                print(board.objects)
+                BoardSaver.save_board_to_file(board, 'boards/new_board.txt')
 
         if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # left click grows radius
@@ -68,17 +69,14 @@ while True: # the main game loop
                         if sprite.__class__.__name__ != FreeSpaceSprite.__name__:
                             sprites.remove(sprite)
                         board_x = int(x / sprite.rect.width)
-                        board_y = int(y / sprite.rect.width)
+                        board_y = int(y / sprite.rect.height)
 
                         board.objects[board_y][board_x] = new_object
                         sprites.add(new_object.sprite)
 
-    #Refresh Screen
 
     sprites.draw(DISPLAYSURF)
-    # for o in sprites:
-    #     DISPLAYSURF.blit(o.image, o.image.get_rect())
-    #DISPLAYSURF.blit(background_image, (300, 300))
+
     pygame.display.flip()
     fpsClock.tick(FPS)
 
