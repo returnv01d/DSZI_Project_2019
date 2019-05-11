@@ -9,3 +9,6 @@ class Kitchen:
 
     def __repr__(self):
         return "Kitchen"
+
+    def __str__(self):
+        return 'K'

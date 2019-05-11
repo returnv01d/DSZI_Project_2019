@@ -10,3 +10,6 @@ class FreeSpace:
 
     def __repr__(self):
         return "Free Space"
+
+    def __str__(self):
+        return 'F'

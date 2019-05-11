@@ -10,3 +10,6 @@ class Carpet:
 
     def __repr__(self):
         return "Carpet"
+
+    def __str__(self):
+        return "C"
