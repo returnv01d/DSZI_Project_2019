@@ -2,10 +2,10 @@
 F F F F C W C C C K
 F F F F F F F C F F
 F F T F F F F C F F
-F F F F F F C C F F
-F F F F F F F F F F
-F F F F F F F F F F
-F F T F F F F F F F
-F F F F F F F F T F
-F F F F F F F F F F
+F F C F F F C C F F
+F F C C C C C F F F
+F F F C F F F F F F
+F F T C F F C C F F
+F F C C F F C F F F
+F F C C C C C F F F
 F F F F F T F F F F

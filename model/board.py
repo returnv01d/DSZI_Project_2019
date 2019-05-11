@@ -9,8 +9,9 @@ from model.move import Move
 from model.order import Order
 
 class Board:
-    def __init__(self, board_size):
+    def __init__(self, board_size, board_path):
         self.board_size = board_size
+        self.board_path = board_path
         self.objects = []
         self.waiter = None
 
@@ -37,7 +38,8 @@ class Board:
     def generate_board(self):
         board = []
         flag = 0
-        file = open("boards/board1.txt", "r")
+        file = open(self.board_path, "r")
+
         board_size = int(file.readline())
         y, x = map(lambda x: int(x), file.readline().split(" "))
         self.waiter = Waiter()
@@ -63,14 +65,15 @@ class Board:
                 new_object = fields[j].strip()
                 row.append(new_object)
             board.append(row)
+
         file.close()
         return board
 
     def draw_board(self):
         generatedBoard = Board.generate_board(self)
-        for i in range(0, 10):
+        for i in range(0, self.board_size):
             row = []
-            for j in range(0, 10):
+            for j in range(0, self.board_size):
                 new_object = None
                 if (generatedBoard[i][j] == 'F'):
                     new_object = FreeSpace()
@@ -85,6 +88,13 @@ class Board:
                 row.append(new_object)
             self.objects.append(row)
 
+    def save_board(self, saved_board_path, board):
+        file = open(saved_board_path, "w")
+        for i in range(0, board.board_size):
+            for j in range(0, board.board_size):
+                file.write(str(board.objects[j][i]) + " ")
+            file.write("\n")
+        file.close()
 
     def take_dish(self):
         if len(self.waiter.heldOrders) == 0 and len(self.waiter.listOfOrders) != 0:
@@ -140,3 +150,4 @@ class Board:
 
             if next_object.__class__.__name__ == Table.__name__:
                 self.put_dish_on_table(next_object.id, next_object)
+
