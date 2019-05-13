@@ -3,8 +3,8 @@ import pygame
 
 class WaiterSprite(BasicSprite):
     def __init__(self, width, height):
-        image_path = "images/waiter_none.png"
-        BasicSprite.__init__(self, width, height, image_path)
+        image_name = "waiter_none.png"
+        BasicSprite.__init__(self, width, height, image_name)
 
 
     def update_image_waiter(self, number_of_meals):

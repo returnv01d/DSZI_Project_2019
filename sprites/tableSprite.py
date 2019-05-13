@@ -3,8 +3,8 @@ import pygame
 
 class TableSprite(BasicSprite):
     def __init__(self, width, height):
-        image_path = "images/table2.png"
-        BasicSprite.__init__(self, width, height, image_path)
+        self.image_name = "table2.png"
+        BasicSprite.__init__(self, width, height, self.image_name)
 
     def update_image(self):
         self.image = pygame.image.load("images/table3.png")
