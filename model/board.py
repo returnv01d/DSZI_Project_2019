@@ -24,6 +24,12 @@ class Board:
 
         for row in self.objects:
             for j, obj in enumerate(row):
+                if(obj.__class__.__name__ != Carpet.__name__ and obj.__class__.__name__ != FreeSpace.__name__):
+                    floor = FreeSpace()
+                    floor.create_sprite(sprite_width, sprite_height)
+                    floor.sprite.draw(j * sprite_width, current_height)
+                    sprites.add(floor.sprite)
+
                 obj.create_sprite(sprite_width, sprite_height)
                 obj.sprite.draw(j * sprite_width, current_height)
                 sprites.add(obj.sprite)
