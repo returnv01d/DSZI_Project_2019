@@ -1,14 +1,11 @@
 import pygame
 import sys
-from model.board import Board
-from model.waiter import Waiter
 from model.table import Table
 from model.carpet import Carpet
 from model.kitchen import Kitchen
 from model.freeSpace import FreeSpaceSprite, FreeSpace
 from serialization.board_saver import BoardSaver
 from serialization.board_loader import BoardLoader
-from sprites.tableSprite import TableSprite
 from pygame.locals import *
 
 pygame.init()
@@ -27,7 +24,7 @@ background_image = pygame.image.load("images/background_image.png").convert_alph
 #background_image.set_alpha(255)
 pygame.display.set_caption('Restaurant')
 
-board = BoardLoader.load_board_from_file('boards/board1.txt')
+board = BoardLoader.load_board_from_file('boards/empty_board.txt')
 
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 
