@@ -1,6 +1,7 @@
 import pygame
 from PIL import Image,ImageDraw
 
+
 class BasicSprite(pygame.sprite.Sprite):
     def __init__(self, width, height, image_name):
         pygame.sprite.Sprite.__init__(self)
