@@ -1,7 +1,6 @@
-from enum import Enum
 
-class Move(Enum):
-    UP = 1
-    DOWN = 2
-    RIGHT = 3
-    LEFT = 4
+class Move():
+    def __init__(self, move_type, move_item):
+        self.type = move_type
+        self.item = move_item
+
