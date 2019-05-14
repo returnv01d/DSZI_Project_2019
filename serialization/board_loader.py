@@ -17,16 +17,14 @@ class BoardLoader:
         y, x = map(lambda x: int(x), file.readline().split(" "))
         waiter = Waiter()
 
-        # for testing:
+        waiter.x = x
+        waiter.y = y
+
         order1 = Order(0, 'bliny')
         order2 = Order(1, 'schabowy')
         order3 = Order(2, 'przepiorka')
-        waiter.listOfOrders.append(order1)
-        waiter.listOfOrders.append(order2)
-        waiter.listOfOrders.append(order3)
+        orders = [order1, order2, order3]
 
-        waiter.x = x
-        waiter.y = y
 
         loaded_objects = [[FreeSpace for _ in range(0, board_size)] for _ in range(0, board_size)]
         for i, line in enumerate(file):
@@ -43,8 +41,15 @@ class BoardLoader:
                     new_object = Carpet()
                 elif object_letter == 'T':
                     new_object = Table()
+
+                    this_table_orders = [order for order in orders if order.table_id == new_object.id]
+                    new_object.orders.extend(this_table_orders
+                                             )
+                    board.tables.append(new_object)
                 elif object_letter == 'K':
                     new_object = Kitchen()
+                    new_object.orders = orders
+                    board.kitchen = new_object
 
                 loaded_objects[i][j] = new_object
 

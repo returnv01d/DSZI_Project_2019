@@ -6,7 +6,7 @@ class BoardSaver:
 
         file.write(str(board.board_size))
         file.write("\n")
-        file.write("{0} {1}".format(str(board.waiter.x), str(board.waiter.y)))
+        file.write("{0} {1}".format(str(board.waiter.y), str(board.waiter.x)))
         file.write("\n")
 
         for i in range(0, board.board_size):

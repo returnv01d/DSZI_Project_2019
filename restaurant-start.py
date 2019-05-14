@@ -3,6 +3,7 @@ import sys
 from model.board import Board
 from pygame.locals import *
 from model.move import Move
+from model.move_type import MoveType
 from serialization.board_loader import BoardLoader
 
 pygame.init()
@@ -33,13 +34,18 @@ while True: # the main game loop
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_UP:
-                board.move_waiter(Move.UP)
+                board.move_waiter(MoveType.UP)
             if event.key == K_DOWN:
-                board.move_waiter(Move.DOWN)
+                board.move_waiter(MoveType.DOWN)
             if event.key == K_RIGHT:
-                board.move_waiter(Move.RIGHT)
+                board.move_waiter(MoveType.RIGHT)
             if event.key == K_LEFT:
-                board.move_waiter(Move.LEFT)
+                board.move_waiter(MoveType.LEFT)
+            if event.key == K_o:
+                board.take_dish_from_kitchen_to_waiter()
+            if event.key == K_p:
+                board.serve_dish_to_table_from_waiter()
+
 
     DISPLAYSURF.blit(background_image, (0,0))
     sprites.draw(DISPLAYSURF)
