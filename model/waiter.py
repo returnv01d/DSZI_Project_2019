@@ -6,13 +6,13 @@ class Waiter:
 
         self.step = 1
         self.barriers = []
-        self.listOfOrders = []
         self.heldOrders = []
         self.x = None
         self.y = None
 
     def create_sprite(self, width, height):
         self.sprite = WaiterSprite(width, height)
+        self.sprite.update_status(self.status())
 
     def add_to_current_orders(self, meal):
         self.heldOrders.append(meal)
@@ -26,3 +26,9 @@ class Waiter:
 
     def __repr__(self):
         return "Waiter"
+
+    def status(self):
+        status = ["Current orders: "]
+        if len(self.heldOrders) == 0:
+            status.append("None")
+            return status

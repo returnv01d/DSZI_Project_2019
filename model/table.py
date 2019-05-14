@@ -11,9 +11,13 @@ class Table:
 
     def create_sprite(self, width, height):
         self.sprite = TableSprite(width, height)
+        self.sprite.update_status(self.status())
 
     def __repr__(self):
         return "Table"
 
     def __str__(self):
         return 'T'
+
+    def status(self):
+        return ["id: " + str(self.id)]
