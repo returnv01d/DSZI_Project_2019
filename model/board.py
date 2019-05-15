@@ -45,29 +45,49 @@ class Board:
         sprites.add(self.waiter.sprite)
         return sprites
 
-    def take_dish(self):
-        if len(self.waiter.heldOrders) == 0 and len(self.waiter.listOfOrders) != 0:
-            # print(self.waiter.listOfOrders)
-            # print(self.waiter.heldOrders)
+    def take_dish_from_kitchen_to_waiter(self, order):
 
-            self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
-            self.waiter.listOfOrders.pop(0)
-            self.waiter.sprite.update_image_waiter(1)
+        if self.kitchen.check_next_move(self.waiter) == True:
+            self.waiter.heldOrders.append(order)
+            order.is_taken_from_kitchen == True
 
-        elif len(self.waiter.heldOrders) == 1 and len(self.waiter.listOfOrders) != 0:
-            # print(self.waiter.listOfOrders)
-            # print(self.waiter.heldOrders)
+            if len(self.waiter.heldOrders) == 1:
+                self.waiter.sprite.update_image_waiter(1)
 
-            self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
-            self.waiter.listOfOrders.pop(0)
-            self.waiter.sprite.update_image_waiter(2)
+            if len(self.waiter.heldOrders) == 2:
+                self.waiter.sprite.update_image_waiter(2)
 
-    def put_dish_on_table(self, table_id, next_object):
-        for order in self.waiter.heldOrders:
-            if order.table_id == table_id:
-                self.waiter.heldOrders.remove(order)
-                self.waiter.sprite.update_image_waiter(len(self.waiter.heldOrders))
-                next_object.sprite.update_image()
+    def serve_dish_to_table_from_waiter(self, items):
+        table = items[0]
+        order = items[1]
+
+        if table.check_next_move(self.waiter) == True:
+            self.waiter.heldOrders.remove(order)
+            order.is_delivered = True
+
+            if len(self.waiter.heldOrders) == 0:
+                self.waiter.sprite.update_image_waiter(0)
+
+            if len(self.waiter.heldOrders) == 1:
+                self.waiter.sprite.update_image_waiter(1)
+
+    # def take_dish(self):
+    #     if len(self.waiter.heldOrders) == 0:
+    #         self.waiter.heldOrders.append()
+    #         self.waiter.listOfOrders.pop(0)
+    #         self.waiter.sprite.update_image_waiter(1)
+    #
+    #     elif len(self.waiter.heldOrders) == 1 and len(self.waiter.listOfOrders) != 0:
+    #         self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
+    #         self.waiter.listOfOrders.pop(0)
+    #         self.waiter.sprite.update_image_waiter(2)
+
+    # def put_dish_on_table(self, table_id, next_object):
+    #     for order in self.waiter.heldOrders:
+    #         if order.table_id == table_id:
+    #             self.waiter.heldOrders.remove(order)
+    #             self.waiter.sprite.update_image_waiter(len(self.waiter.heldOrders))
+    #             next_object.sprite.update_image()
 
     def get_possible_waiter_fields(self, previous_move):
         x = self.waiter.x
@@ -124,19 +144,32 @@ class Board:
                 # board.x is sprite.y because board.x means which row(height) we change.
 
 
-            if next_object.__class__.__name__ == Kitchen.__name__:
-                self.take_dish()
+            # if next_object.__class__.__name__ == Kitchen.__name__:
+            #     self.take_dish()
+            #
+            # if next_object.__class__.__name__ == Table.__name__:
+            #     self.put_dish_on_table(next_object.id, next_object)
 
-            if next_object.__class__.__name__ == Table.__name__:
-                self.put_dish_on_table(next_object.id, next_object)
+            # print(self.get_possible_waiter_fields())
 
-            print(self.get_possible_waiter_fields())
+    def do(self, move):
+        if move == MoveType.UP:
+            self.move_waiter(move)
 
+        if move == MoveType.DOWN:
+            self.move_waiter(move)
 
+        if move == MoveType.RIGHT:
+            self.move_waiter(move)
 
+        if move == MoveType.LEFT:
+            self.move_waiter(move)
 
+        if move == MoveType.TAKE_ORDER:
+            self.take_dish_from_kitchen_to_waiter(move.item)
 
+        if move == MoveType.SERVE_ORDER:
+            self.serve_dish_to_table_from_waiter(move.item)
 
-
-
+        return self
 
