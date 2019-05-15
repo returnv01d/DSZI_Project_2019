@@ -21,7 +21,7 @@ DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load('images/background_image.png')
 pygame.display.set_caption('Restaurant')
 
-board = BoardLoader.load_board_from_file('boards/new_board.txt')
+board = BoardLoader.load_board_from_file('boards/board1.txt')
 
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
