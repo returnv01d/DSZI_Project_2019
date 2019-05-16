@@ -1,3 +1,6 @@
+import itertools
+
+from model import kitchen
 from model.waiter import Waiter
 from model.order import Order
 from model.kitchen import Kitchen
@@ -25,6 +28,20 @@ class BoardLoader:
         for k in range(0, orders_size):
             order = file.readline().split()
             orders.append(Order(order[0],order[1]))
+
+        print(orders)
+
+        #here you can test method get_possible_order_combinations from kitchen
+        # ordersToServe = []
+        # listOfCombinations = []
+        # for i in range(len(orders)):
+        #     if orders[i].is_taken_from_kitchen == False:
+        #        ordersToServe.append(orders[i])
+        # if len(waiter.heldOrders) == 0:
+        #     listOfCombinations = set(list(itertools.combinations(ordersToServe, 2)))
+        # elif len(waiter.heldOrders) == 1:
+        #     listOfCombinations = set(list(itertools.combinations(ordersToServe, 1)))
+        # print(list(listOfCombinations))
 
         loaded_objects = [[FreeSpace for _ in range(0, board_size)] for _ in range(0, board_size)]
 
