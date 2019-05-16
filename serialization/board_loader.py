@@ -11,7 +11,6 @@ class BoardLoader:
     @staticmethod
     def load_board_from_file(filepath):
         file = open(filepath, "r")
-
         board_size = int(file.readline())
         board = Board(board_size)
         y, x = map(lambda x: int(x), file.readline().split(" "))
@@ -20,13 +19,15 @@ class BoardLoader:
         waiter.x = x
         waiter.y = y
 
-        order1 = Order(0, 'bliny')
-        order2 = Order(1, 'schabowy')
-        order3 = Order(2, 'przepiorka')
-        orders = [order1, order2, order3]
+        orders=[]
+        orders_size = int(file.readline())
 
+        for k in range(0, orders_size):
+            order = file.readline().split()
+            orders.append(Order(order[0],order[1]))
 
         loaded_objects = [[FreeSpace for _ in range(0, board_size)] for _ in range(0, board_size)]
+
         for i, line in enumerate(file):
             fields = line.split(" ")
             new_object = None
@@ -43,8 +44,7 @@ class BoardLoader:
                     new_object = Table()
 
                     this_table_orders = [order for order in orders if order.table_id == new_object.id]
-                    new_object.orders.extend(this_table_orders
-                                             )
+                    new_object.orders.extend(this_table_orders)
                     board.tables.append(new_object)
                 elif object_letter == 'K':
                     new_object = Kitchen()
