@@ -1,3 +1,6 @@
+import itertools
+
+from model import waiter, move
 from sprites.kitchenSprite import KitchenSprite
 from model.order import Order
 from model.move import Move
@@ -35,3 +38,30 @@ class Kitchen:
         if len(waiter.heldOrders) < 2 and self.orders:
             return True
         return False
+
+    def get_possible_order_combinations(self, waiter):
+        ordersToServe = []
+        listOfCombinations = []
+
+        for i in range(len(self.orders)):
+            if self.orders[i].is_taken_from_kitchen == False:
+                ordersToServe.append(self.orders[i])
+
+        if len(waiter.heldOrders) == 0:
+            listOfCombinations = set(list(itertools.combinations(ordersToServe, 2)))
+        elif len(waiter.heldOrders) == 1:
+            listOfCombinations = set(list(itertools.combinations(ordersToServe, 1)))
+
+        return list(listOfCombinations)
+
+    def get_moves_with_possible_combinations(self):
+        listOfCombinations = self.get_possible_order_combinations(waiter)
+        listOfMoves = []
+        for i in range(len(listOfCombinations)):
+            move.Move.first_order = listOfCombinations[i][0]
+            move.Move.second_order = listOfCombinations[i][1]
+            listOfMoves.append(move.Move)
+        print(listOfMoves[1].first_order)
+
+        return listOfMoves
+
