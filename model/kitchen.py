@@ -41,7 +41,10 @@ class Kitchen:
                 ordersToServe.append(self.orders[i])
 
         if len(waiter.heldOrders) == 0:
-            listOfCombinations = set(list(itertools.combinations(ordersToServe, 2)))
+            if len(ordersToServe) > 1:
+                listOfCombinations = set(list(itertools.combinations(ordersToServe, 2)))
+            else:
+                listOfCombinations = set(list(itertools.combinations(ordersToServe, 1)))
         elif len(waiter.heldOrders) == 1:
             listOfCombinations = set(list(itertools.combinations(ordersToServe, 1)))
 
@@ -51,9 +54,8 @@ class Kitchen:
         listOfCombinations = self.get_possible_order_combinations(waiter)
         listOfMoves = []
         for i in range(len(listOfCombinations)):
-            move.Move.first_order = listOfCombinations[i][0]
-            move.Move.second_order = listOfCombinations[i][1]
-            listOfMoves.append(move.Move)
-        print(listOfMoves[1].first_order)
+            move = Move(5, listOfCombinations[i][0], listOfCombinations[i][1])
+            listOfMoves.append(move)
+        print(listOfMoves)
 
         return listOfMoves

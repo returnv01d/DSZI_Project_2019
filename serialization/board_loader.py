@@ -46,10 +46,9 @@ class BoardLoader:
         # listOfCombinations = list(listOfCombinations);
         # listOfMoves = []
         # for i in range(len(listOfCombinations)):
-        #     move.Move.first_order = listOfCombinations[i][0]
-        #     move.Move.second_order = listOfCombinations[i][1]
-        #     listOfMoves.append(move.Move)
-        # print(listOfMoves[1].first_order)
+        #     move = Move(5, listOfCombinations[i][0], listOfCombinations[i][1])
+        #     listOfMoves.append(move)
+        # print(listOfMoves)
 
 
         loaded_objects = [[FreeSpace for _ in range(0, board_size)] for _ in range(0, board_size)]
