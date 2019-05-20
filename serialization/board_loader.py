@@ -2,6 +2,7 @@ import itertools
 
 from model import kitchen, move
 from model.move import Move
+from model.move_type import MoveType
 from model.waiter import Waiter
 from model.order import Order
 from model.kitchen import Kitchen
@@ -46,7 +47,7 @@ class BoardLoader:
         # listOfCombinations = list(listOfCombinations);
         # listOfMoves = []
         # for i in range(len(listOfCombinations)):
-        #     move = Move(5, listOfCombinations[i][0], listOfCombinations[i][1])
+        #     move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
         #     listOfMoves.append(move)
         # print(listOfMoves)
 

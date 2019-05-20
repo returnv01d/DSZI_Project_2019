@@ -1,6 +1,7 @@
 import itertools
 
 from model import waiter, move
+from model.move_type import MoveType
 from sprites.kitchenSprite import KitchenSprite
 from model.order import Order
 from model.move import Move
@@ -54,7 +55,7 @@ class Kitchen:
         listOfCombinations = self.get_possible_order_combinations(waiter)
         listOfMoves = []
         for i in range(len(listOfCombinations)):
-            move = Move(5, listOfCombinations[i][0], listOfCombinations[i][1])
+            move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
             listOfMoves.append(move)
         print(listOfMoves)
 
