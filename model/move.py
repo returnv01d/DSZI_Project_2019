@@ -1,5 +1,5 @@
 
-class Move():
+class Move:
     def __init__(self, move_type, first_order = None, second_order = None, target_table = None):
         self.type = move_type
         self.first_order = first_order
