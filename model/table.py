@@ -32,6 +32,12 @@ class Table:
     def check_if_next_move_possible(self, previous_move, waiter):
         if not set(waiter.heldOrders).isdisjoint(self.orders):
             return True
-
         return False
+
+
+    def get_order_from_waiter(self, idOrder):
+        self.received_orders.append(self.orders[idOrder])
+        self.orders.remove(self.orders[idOrder])
+
+
 
