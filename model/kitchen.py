@@ -60,3 +60,7 @@ class Kitchen:
         print(listOfMoves)
 
         return listOfMoves
+
+    def give_order_to_waiter(self, idOrder):
+        if len(self.waiting_orders()) != 0:
+            self.orders[idOrder].is_taken_from_kitchen = True
