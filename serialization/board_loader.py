@@ -2,6 +2,7 @@ import itertools
 
 from model import kitchen, move
 from model.move import Move
+from model.move_type import MoveType
 from model.waiter import Waiter
 from model.order import Order
 from model.kitchen import Kitchen
@@ -46,10 +47,9 @@ class BoardLoader:
         # listOfCombinations = list(listOfCombinations);
         # listOfMoves = []
         # for i in range(len(listOfCombinations)):
-        #     move.Move.first_order = listOfCombinations[i][0]
-        #     move.Move.second_order = listOfCombinations[i][1]
-        #     listOfMoves.append(move.Move)
-        # print(listOfMoves[1].first_order)
+        #     move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
+        #     listOfMoves.append(move)
+        # print(listOfMoves)
 
 
         loaded_objects = [[FreeSpace for _ in range(0, board_size)] for _ in range(0, board_size)]
