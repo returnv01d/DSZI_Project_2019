@@ -29,9 +29,9 @@ class BoardLoader:
 
         for k in range(0, orders_size):
             order = file.readline().split()
-            orders.append(Order(order[0],order[1]))
+            orders.append(Order(int(order[0]),order[1]))
+            # orders.append(Order(order[0],order[1]))
 
-       # print(orders)
 
         #here you can test method get_possible_order_combinations from kitchen and get_move
         # ordersToServe = []
@@ -74,13 +74,13 @@ class BoardLoader:
                     new_object.orders.extend(this_table_orders)
                     board.tables.append(new_object)
                 elif object_letter == 'K':
-                    new_object = Kitchen()
-                    new_object.orders = orders
+                    new_object = Kitchen(orders)
                     board.kitchen = new_object
 
                 loaded_objects[i][j] = new_object
 
         print(loaded_objects)
+        print(board.kitchen.waiting_orders)
 
         board.objects = loaded_objects
         board.waiter = waiter

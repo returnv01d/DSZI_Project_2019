@@ -29,7 +29,7 @@ class Table:
 
         return statuses
 
-    def check_if_next_move_possible(self, previous_move, waiter):
+    def check_if_interaction_possible(self, waiter):
         if not set(waiter.heldOrders).isdisjoint(self.orders):
             return True
         return False
