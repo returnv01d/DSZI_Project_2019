@@ -99,9 +99,9 @@ class Board:
 
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
-        fields = self.get_possible_waiter_fields()
-        for field in fields:
-            field
+        fields = self.get_possible_waiter_fields(previous_move)
+        filtered = MoveFilter.check_interactions(fields, previous_move)
+
 
 
     def all_orders_served(self):

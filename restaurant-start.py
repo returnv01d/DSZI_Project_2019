@@ -26,7 +26,6 @@ board = BoardLoader.load_board_from_file('boards/board1.txt')
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
 
-
 while True: # the main game loop
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -34,12 +33,16 @@ while True: # the main game loop
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_UP:
+                board.get_possible_waiter_moves(MoveType.UP)
                 board.move_waiter(MoveType.UP)
             if event.key == K_DOWN:
+                board.get_possible_waiter_moves(MoveType.DOWN)
                 board.move_waiter(MoveType.DOWN)
             if event.key == K_RIGHT:
+                board.get_possible_waiter_moves(MoveType.RIGHT)
                 board.move_waiter(MoveType.RIGHT)
             if event.key == K_LEFT:
+                board.get_possible_waiter_moves(MoveType.LEFT)
                 board.move_waiter(MoveType.LEFT)
             if event.key == K_o:
                 board.take_dish_from_kitchen_to_waiter()

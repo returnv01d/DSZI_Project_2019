@@ -18,11 +18,16 @@ class MoveFilter:
 
     @staticmethod
     def filter_previous_move(fields, previous_move):
-        if fields["UP"] == Carpet.__name__ and previous_move.type == MoveType.UP:
-            fields["UP"] = None
-        elif fields["DOWN"] == Carpet.__name__ and previous_move.type == MoveType.DOWN:
-            fields["DOWN"] = None
-        elif fields["LEFT"] == Carpet.__name__ and previous_move.type == MoveType.LEFT:
-            fields["LEFT"] = None
-        elif fields["RIGHT"] == Carpet.__name__ and previous_move.type == MoveType.RIGHT:
-            fields["RIGHT"] = None
+        if fields["UP"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.DOWN:
+            fields[MoveType.UP] = None
+        elif fields["DOWN"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.UP:
+            fields[MoveType.DOWN] = None
+        elif fields["LEFT"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.RIGHT:
+            fields[MoveType.LEFT] = None
+        elif fields["RIGHT"].__class.__name__ == Carpet.__name__ and previous_move == MoveType.LEFT:
+            fields[MoveType.RIGHT] = None
+
+    @staticmethod
+    def check_interactions(fields, previous_move):
+        MoveFilter.filter_possible_moves(fields, previous_move)
+
