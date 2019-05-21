@@ -1,5 +1,6 @@
 from sprites.waiterSprite import WaiterSprite
 
+
 class Waiter:
     def __init__(self):
         self.sprite = None
@@ -32,3 +33,15 @@ class Waiter:
         if len(self.heldOrders) == 0:
             status.append("None")
             return status
+
+
+    def put_order_on_the_table(self, idOrder):
+        if len(self.heldOrders) != 0:
+            #self.remove_from_current_orders(kitchen.Kitchen.orders[idOrder]) -- nie widzi kitchen
+            self.remove_from_current_orders(idOrder) #usuwa samo idOrder, zamiast obiekt Order o takim id
+
+
+
+    def get_order_from_kitchen(self, idOrder):
+        #self.add_to_current_orders(kitchen.Kitchen.orders[idOrder]) -- nie widzi kitchen
+        self.add_to_current_orders(idOrder) #dodaje samo idOrder, zamiast obiekt Order o takim id
