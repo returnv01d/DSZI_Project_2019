@@ -69,7 +69,8 @@ class BoardLoader:
                 elif object_letter == 'T':
                     new_object = Table()
 
-                    this_table_orders = [order for order in orders if order.table_id == new_object.id]
+                    this_table_orders = [order for order in orders if int(order.table_id) == int(new_object.id)]
+
                     new_object.orders.extend(this_table_orders)
                     board.tables.append(new_object)
                 elif object_letter == 'K':
