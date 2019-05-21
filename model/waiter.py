@@ -34,14 +34,11 @@ class Waiter:
             status.append("None")
             return status
 
-
-    def put_order_on_the_table(self, idOrder):
+    def put_order_on_the_table(self, order):
         if len(self.heldOrders) != 0:
-            #self.remove_from_current_orders(kitchen.Kitchen.orders[idOrder]) -- nie widzi kitchen
-            self.remove_from_current_orders(idOrder) #usuwa samo idOrder, zamiast obiekt Order o takim id
+            self.heldOrders.remove(order)
 
+    def get_order_from_kitchen(self, order):
+        self.heldOrders.append(order)
+        print(self.heldOrders)
 
-
-    def get_order_from_kitchen(self, idOrder):
-        #self.add_to_current_orders(kitchen.Kitchen.orders[idOrder]) -- nie widzi kitchen
-        self.add_to_current_orders(idOrder) #dodaje samo idOrder, zamiast obiekt Order o takim id

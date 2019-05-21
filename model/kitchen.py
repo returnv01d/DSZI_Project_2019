@@ -65,4 +65,6 @@ class Kitchen:
 
     def give_order_to_waiter(self, idOrders):
         self.waiting_orders[idOrders].is_taken_from_kitchen = True
+        self.taken_orders.append(self.waiting_orders[idOrders])
         self.waiting_orders.remove(self.waiting_orders[idOrders])
+
