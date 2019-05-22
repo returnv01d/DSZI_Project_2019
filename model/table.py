@@ -38,7 +38,8 @@ class Table:
     def get_order_from_waiter(self, order):
         self.received_orders.append(order)
         self.orders.remove(order)
-
+        if len(self.orders) == 0:
+            self.received_all_orders = True
 
 
 
