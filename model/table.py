@@ -35,9 +35,10 @@ class Table:
         return False
 
 
-    def get_order_from_waiter(self, idOrder):
-        self.received_orders.append(self.orders[idOrder])
-        self.orders.remove(self.orders[idOrder])
+    def get_order_from_waiter(self, order):
+        self.received_orders.append(order)
+        self.orders.remove(order)
+
 
 
 
