@@ -45,14 +45,14 @@ class MoveFilter:
 
 
         if fields['UP'].__class__.__name__ == 'Table':
-            if fields['UP'].check_if_interaction_possible(waiter):
+            if fields['UP'].check_if_interaction_possible(waiter) == False:
                 fields['UP'] = None
         elif fields['DOWN'].__class__.__name__ == 'Table':
-            if fields['DOWN'].check_if_interaction_possible(waiter):
+            if fields['DOWN'].check_if_interaction_possible(waiter) == False:
                 fields['DOWN'] = None
         elif fields['LEFT'].__class__.__name__ == 'Table':
-            if fields['LEFT'].check_if_interaction_possible(waiter):
+            if fields['LEFT'].check_if_interaction_possible(waiter) == False:
                 fields['LEFT'] = None
         elif fields['RIGHT'].__class__.__name__ == 'Table':
-            if fields['RIGHT'].check_if_interaction_possible(waiter):
+            if fields['RIGHT'].check_if_interaction_possible(waiter) == False:
                 fields['RIGHT'] = None
