@@ -1,16 +1,14 @@
-from model import kitchen
 from model.carpet import Carpet
 from model.freeSpace import FreeSpace
 from model.move_type import MoveType
-from model.waiter import Waiter
 
 
 class MoveFilter:
 
     @staticmethod
-    def filter_possible_moves(fields, previous_move):
+    def filter_possible_moves(fields, previous_move, waiter):
         MoveFilter.filter_previous_move(fields, previous_move)
-        MoveFilter.check_interactions(fields, Waiter)
+        MoveFilter.check_interactions(fields, waiter)
         return MoveFilter.filter_from_none_and_free_space(fields)
 
     @staticmethod
@@ -33,23 +31,28 @@ class MoveFilter:
 
     def check_interactions(fields, waiter):
         if fields['UP'].__class__.__name__ == 'Kitchen':
-            print("ddd")
-            #if kitchen.stillHasOrders == False
-                #fields['UP'] = None
+            if fields['UP'].check_if_next_move_possible(waiter):
+                fields['UP'] = None
         elif fields['DOWN'].__class__.__name__ == 'Kitchen':
-            print("ff")
+            if fields['DOWN'].check_if_next_move_possible(waiter):
+                fields['RIGHT'] = None
         elif fields['LEFT'].__class__.__name__ == 'Kitchen':
-            print("ff")
+            if fields['LEFT'].check_if_next_move_possible(waiter):
+                fields['LEFT'] = None
         elif fields['RIGHT'].__class__.__name__ == 'Kitchen':
-            print("ff")
+            if fields['RIGHT'].check_if_next_move_possible(waiter):
+                fields['RIGHT'] = None
+
 
         if fields['UP'].__class__.__name__ == 'Table':
-            print("ddd")
-            #if table.moznaWykonacJakasInterakcje == False
-                #fields['UP'] = None
+            if fields['UP'].check_if_interaction_possible(waiter):
+                fields['UP'] = None
         elif fields['DOWN'].__class__.__name__ == 'Table':
-            print("ff")
+            if fields['DOWN'].check_if_interaction_possible(waiter):
+                fields['DOWN'] = None
         elif fields['LEFT'].__class__.__name__ == 'Table':
-            print("ff")
+            if fields['LEFT'].check_if_interaction_possible(waiter):
+                fields['LEFT'] = None
         elif fields['RIGHT'].__class__.__name__ == 'Table':
-            print("ff")
+            if fields['RIGHT'].check_if_interaction_possible(waiter):
+                fields['RIGHT'] = None

@@ -99,12 +99,13 @@ class Board:
         y = self.waiter.y
 
         fields = {"LEFT" : self.object_at(x, y - 1), "RIGHT" : self.object_at(x, y + 1), "DOWN":self.object_at(x + 1, y ), "UP":self.object_at(x - 1, y)}
-        filtered = MoveFilter.filter_possible_moves(fields, previous_move)
+        filtered = MoveFilter.filter_possible_moves(fields, previous_move, self.waiter)
         return filtered
 
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
         fields = self.get_possible_waiter_fields(previous_move)
+        print(fields)
 
 
 
