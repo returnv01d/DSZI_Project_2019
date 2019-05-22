@@ -1,14 +1,17 @@
 import itertools
 
 from model import waiter, move
+from model.move_type import MoveType
 from sprites.kitchenSprite import KitchenSprite
 from model.order import Order
 from model.move import Move
 
 class Kitchen:
-    def __init__(self):
+    def __init__(self, orders):
         self.sprite = None
-        self.orders = [Order]
+        self.waiting_orders = orders
+        self.taken_orders = []
+
 
     def create_sprite(self, width, height):
         self.sprite = KitchenSprite(width, height)
@@ -21,14 +24,14 @@ class Kitchen:
         return 'K'
 
     def statuses(self):
-        orders_as_strings = [repr(order) for order in self.orders]
+        orders_as_strings = [repr(order) for order in self.waiting_orders]
         return orders_as_strings
 
     def waiting_orders(self):
-        return [order for order in self.orders if order.is_taken_from_kitchen is False]
+        return [order for order in self.waiting_orders if order.is_taken_from_kitchen is False]
 
-    def check_if_next_move_possible(self, previous_move):
-        if previous_move.type == Move.TAKE_ORDER:
+    def check_if_next_move_possible(self, waiter):
+        if len(waiter.heldOrders) == 2 or not self.waiting_orders:
             return False
         return True
 
@@ -36,12 +39,15 @@ class Kitchen:
         ordersToServe = []
         listOfCombinations = []
 
-        for i in range(len(self.orders)):
-            if self.orders[i].is_taken_from_kitchen == False:
-                ordersToServe.append(self.orders[i])
+        for i in range(len(self.waiting_orders)):
+            if self.waiting_orders[i].is_taken_from_kitchen == False:
+                ordersToServe.append(self.waiting_orders[i])
 
         if len(waiter.heldOrders) == 0:
-            listOfCombinations = set(list(itertools.combinations(ordersToServe, 2)))
+            if len(ordersToServe) > 1:
+                listOfCombinations = set(list(itertools.combinations(ordersToServe, 2)))
+            else:
+                listOfCombinations = set(list(itertools.combinations(ordersToServe, 1)))
         elif len(waiter.heldOrders) == 1:
             listOfCombinations = set(list(itertools.combinations(ordersToServe, 1)))
 
@@ -51,9 +57,8 @@ class Kitchen:
         listOfCombinations = self.get_possible_order_combinations(waiter)
         listOfMoves = []
         for i in range(len(listOfCombinations)):
-            move.Move.first_order = listOfCombinations[i][0]
-            move.Move.second_order = listOfCombinations[i][1]
-            listOfMoves.append(move.Move)
-        print(listOfMoves[1].first_order)
+            move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
+            listOfMoves.append(move)
+        print(listOfMoves)
 
         return listOfMoves
