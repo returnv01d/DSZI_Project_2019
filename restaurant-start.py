@@ -26,7 +26,6 @@ board = BoardLoader.load_board_from_file('boards/board1.txt')
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
 
-
 while True: # the main game loop
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -51,7 +50,7 @@ while True: # the main game loop
             if event.key == K_p:
                 # board.serve_dish_to_table_from_waiter()
                 # print(board.waiter.heldOrders[0].table_id)
-                board.do(Move(MoveType.SERVE_ORDER, first_order= board.kitchen.waiting_orders[0], target_table= board.tables[board.waiter.heldOrders[0].table_id]))
+                board.do(Move(MoveType.SERVE_ORDER, first_order= board.kitchen.waiting_orders[0], target_table_id= board.tables[board.waiter.heldOrders[0].table_id]))
 
 
     DISPLAYSURF.blit(background_image, (0,0))
