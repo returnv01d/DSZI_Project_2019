@@ -6,12 +6,12 @@ from sprites.kitchenSprite import KitchenSprite
 from model.order import Order
 from model.move import Move
 
+
 class Kitchen:
     def __init__(self, orders):
         self.sprite = None
         self.waiting_orders = orders
         self.taken_orders = []
-
 
     def create_sprite(self, width, height):
         self.sprite = KitchenSprite(width, height)
@@ -62,3 +62,9 @@ class Kitchen:
         print(listOfMoves)
 
         return listOfMoves
+
+    def give_order_to_waiter(self, idOrders):
+        self.waiting_orders[idOrders].is_taken_from_kitchen = True
+        self.taken_orders.append(self.waiting_orders[idOrders])
+        self.waiting_orders.remove(self.waiting_orders[idOrders])
+
