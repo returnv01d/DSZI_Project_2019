@@ -59,6 +59,5 @@ class Kitchen:
         for i in range(len(listOfCombinations)):
             move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
             listOfMoves.append(move)
-        print(listOfMoves)
 
         return listOfMoves
