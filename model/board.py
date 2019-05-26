@@ -105,7 +105,25 @@ class Board:
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
         fields = self.get_possible_waiter_fields(previous_move)
-        print(fields)
+        for j in fields:
+            if str(fields[j]) == "K":
+                possible_moves.extend(self.kitchen.get_moves_with_possible_combinations(self.waiter))
+            if str(fields[j]) == "T":
+                possible_moves.extend(self.table.get_move_with_possible_combination(self.waiter))
+            if str(fields[j]) == "C" and j == "DOWN":
+                move = Move(MoveType.DOWN)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "UP":
+                move = Move(MoveType.UP)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "RIGHT":
+                move = Move(MoveType.RIGHT)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "LEFT":
+                move = Move(MoveType.LEFT)
+                possible_moves.append(move)
+        print(possible_moves)
+        return possible_moves
 
 
 

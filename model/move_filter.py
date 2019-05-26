@@ -30,17 +30,18 @@ class MoveFilter:
         return fields
 
     def check_interactions(fields, waiter):
+
         if fields['UP'].__class__.__name__ == 'Kitchen':
-            if fields['UP'].check_if_next_move_possible(waiter):
+            if fields['UP'].check_if_next_move_possible(waiter) == False:
                 fields['UP'] = None
         elif fields['DOWN'].__class__.__name__ == 'Kitchen':
-            if fields['DOWN'].check_if_next_move_possible(waiter):
+            if fields['DOWN'].check_if_next_move_possible(waiter) == False:
                 fields['RIGHT'] = None
         elif fields['LEFT'].__class__.__name__ == 'Kitchen':
-            if fields['LEFT'].check_if_next_move_possible(waiter):
+            if fields['LEFT'].check_if_next_move_possible(waiter) == False:
                 fields['LEFT'] = None
         elif fields['RIGHT'].__class__.__name__ == 'Kitchen':
-            if fields['RIGHT'].check_if_next_move_possible(waiter):
+            if fields['RIGHT'].check_if_next_move_possible(waiter) == False:
                 fields['RIGHT'] = None
 
 
