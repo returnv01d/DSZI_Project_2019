@@ -107,10 +107,10 @@ class Board:
         fields = self.get_possible_waiter_fields(previous_move)
         for j in fields:
             if str(fields[j]) == "K":
-                possible_moves.extend(self.kitchen.get_moves_with_possible_combinations(self.waiter))
-            if str(fields[j]) == "T":
-                possible_moves.extend(self.table.get_move_with_possible_combination(self.waiter))
-            if str(fields[j]) == "C" and j == "DOWN":
+                possible_moves.extend(fields[j].get_moves_with_possible_combinations(self.waiter))
+            elif str(fields[j]) == "T":
+                possible_moves.append(fields[j].get_move_with_possible_combination(self.waiter))
+            elif str(fields[j]) == "C" and j == "DOWN":
                 move = Move(MoveType.DOWN)
                 possible_moves.append(move)
             elif str(fields[j]) == "C" and j == "UP":
