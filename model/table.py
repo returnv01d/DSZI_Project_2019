@@ -62,3 +62,4 @@ class Table:
     def update_status(self):
         if self.sprite is not None:
             self.sprite.update_status(self.status())
+
