@@ -6,7 +6,6 @@ class WaiterSprite(BasicSprite):
         image_name = "waiter_none.png"
         BasicSprite.__init__(self, width, height, image_name)
 
-
     def update_image_waiter(self, number_of_meals):
         if number_of_meals == 0:
             self.image_name = "waiter_none.png"
