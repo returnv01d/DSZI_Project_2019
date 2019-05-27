@@ -1,0 +1,15 @@
+10
+6 2
+2
+0 gulasz
+1 sernik
+F F F F F F F F F F 
+F F F F F F F F F F 
+F F F T C C C K F F 
+F F F F F F C F F F
+F F F F F F T F F F
+F F F F F F F F F F 
+F F F F F F F F F F 
+F F F F F F F F F F 
+F F F F F F F F F F 
+F F F F F F F F F F 

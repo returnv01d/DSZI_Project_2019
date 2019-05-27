@@ -9,11 +9,13 @@ class WaiterSprite(BasicSprite):
 
     def update_image_waiter(self, number_of_meals):
         if number_of_meals == 0:
-            self.image = pygame.image.load("images/waiter_none.png")
-        elif number_of_meals == 1:
-            self.image = pygame.image.load("images/waiter_one.png")
-        elif number_of_meals == 2:
-            self.image = pygame.image.load("images/waiter_two.png")
+            self.image_name = "waiter_none.png"
 
-        self.image = pygame.transform.scale(self.image, (self.rect.width, self.rect.height))
+        elif number_of_meals == 1:
+            self.image_name = "waiter_one.png"
+        elif number_of_meals == 2:
+            self.image_name = "waiter_two.png"
+
+        BasicSprite.__init__(self, self.rect.width, self.rect.height, self.image_name)
+
 

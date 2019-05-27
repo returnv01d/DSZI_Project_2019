@@ -1,9 +1,10 @@
 10
 8 1
-3
+4
 0 rosol
 1 bliny
 2 sernik
+2 kanapka
 F F F F F F F F C K
 F C C C C C C C C F
 C C F F F C F F C F
