@@ -99,14 +99,32 @@ class Board:
         y = self.waiter.y
 
         fields = {"LEFT" : self.object_at(x, y - 1), "RIGHT" : self.object_at(x, y + 1), "DOWN":self.object_at(x + 1, y ), "UP":self.object_at(x - 1, y)}
-        filtered = MoveFilter.filter_possible_moves(fields, previous_move)
+        filtered = MoveFilter.filter_possible_moves(fields, previous_move, self.waiter)
         return filtered
 
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
-        fields = self.get_possible_waiter_fields()
-        for field in fields:
-            field
+        fields = self.get_possible_waiter_fields(previous_move)
+        for j in fields:
+            if str(fields[j]) == "K":
+                possible_moves.extend(fields[j].get_moves_with_possible_combinations(self.waiter))
+            elif str(fields[j]) == "T":
+                possible_moves.append(fields[j].get_move_with_possible_combination(self.waiter))
+            elif str(fields[j]) == "C" and j == "DOWN":
+                move = Move(MoveType.DOWN)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "UP":
+                move = Move(MoveType.UP)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "RIGHT":
+                move = Move(MoveType.RIGHT)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "LEFT":
+                move = Move(MoveType.LEFT)
+                possible_moves.append(move)
+        print(possible_moves)
+        return possible_moves
+
 
 
     def all_orders_served(self):

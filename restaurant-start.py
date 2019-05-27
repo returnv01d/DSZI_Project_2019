@@ -21,11 +21,10 @@ DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load('images/background_image.png')
 pygame.display.set_caption('Restaurant')
 
-board = BoardLoader.load_board_from_file('boards/new_board.txt')
+board = BoardLoader.load_board_from_file('boards/board1.txt')
 
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
-
 
 while True: # the main game loop
     for event in pygame.event.get():
@@ -34,24 +33,24 @@ while True: # the main game loop
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_UP:
-                board.do(Move(MoveType.UP))
-                # board.move_waiter(MoveType.UP)
+                board.move_waiter(MoveType.UP)
+                board.get_possible_waiter_moves(MoveType.UP)
             if event.key == K_DOWN:
-                board.do(Move(MoveType.DOWN))
-                # board.move_waiter(MoveType.DOWN)
+                board.move_waiter(MoveType.DOWN)
+                board.get_possible_waiter_moves(MoveType.DOWN)
             if event.key == K_RIGHT:
-                board.do(Move(MoveType.RIGHT))
-                # board.move_waiter(MoveType.RIGHT)
+                board.move_waiter(MoveType.RIGHT)
+                board.get_possible_waiter_moves(MoveType.RIGHT)
             if event.key == K_LEFT:
-                # board.move_waiter(MoveType.LEFT)
-                board.do(Move(MoveType.LEFT))
+                board.move_waiter(MoveType.LEFT)
+                board.get_possible_waiter_moves(MoveType.LEFT)
             if event.key == K_o:
                 board.do(Move(MoveType.TAKE_ORDER, first_order= board.kitchen.waiting_orders[0]))
                 # board.take_dish_from_kitchen_to_waiter()
             if event.key == K_p:
                 # board.serve_dish_to_table_from_waiter()
                 # print(board.waiter.heldOrders[0].table_id)
-                board.do(Move(MoveType.SERVE_ORDER, first_order= board.kitchen.waiting_orders[0], target_table= board.tables[board.waiter.heldOrders[0].table_id]))
+                board.do(Move(MoveType.SERVE_ORDER, first_order= board.kitchen.waiting_orders[0], target_table_id= board.tables[board.waiter.heldOrders[0].table_id]))
 
 
     DISPLAYSURF.blit(background_image, (0,0))

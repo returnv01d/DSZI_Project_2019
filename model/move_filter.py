@@ -1,13 +1,14 @@
 from model.carpet import Carpet
 from model.freeSpace import FreeSpace
-from model.move import Move
 from model.move_type import MoveType
+
 
 class MoveFilter:
 
     @staticmethod
-    def filter_possible_moves(fields, previous_move):
+    def filter_possible_moves(fields, previous_move, waiter):
         MoveFilter.filter_previous_move(fields, previous_move)
+        MoveFilter.check_interactions(fields, waiter)
         return MoveFilter.filter_from_none_and_free_space(fields)
 
     @staticmethod
@@ -18,11 +19,41 @@ class MoveFilter:
 
     @staticmethod
     def filter_previous_move(fields, previous_move):
-        if fields["UP"] == Carpet.__name__ and previous_move.type == MoveType.UP:
-            fields["UP"] = None
-        elif fields["DOWN"] == Carpet.__name__ and previous_move.type == MoveType.DOWN:
-            fields["DOWN"] = None
-        elif fields["LEFT"] == Carpet.__name__ and previous_move.type == MoveType.LEFT:
-            fields["LEFT"] = None
-        elif fields["RIGHT"] == Carpet.__name__ and previous_move.type == MoveType.RIGHT:
-            fields["RIGHT"] = None
+        if fields["UP"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.DOWN:
+            fields['UP'] = None
+        elif fields["DOWN"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.UP:
+            fields['DOWN'] = None
+        elif fields["LEFT"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.RIGHT:
+            fields['LEFT'] = None
+        elif fields["RIGHT"].__class__.__name__ == Carpet.__name__ and previous_move == MoveType.LEFT:
+            fields['RIGHT'] = None
+        return fields
+
+    def check_interactions(fields, waiter):
+
+        if fields['UP'].__class__.__name__ == 'Kitchen':
+            if fields['UP'].check_if_next_move_possible(waiter) == False:
+                fields['UP'] = None
+        elif fields['DOWN'].__class__.__name__ == 'Kitchen':
+            if fields['DOWN'].check_if_next_move_possible(waiter) == False:
+                fields['RIGHT'] = None
+        elif fields['LEFT'].__class__.__name__ == 'Kitchen':
+            if fields['LEFT'].check_if_next_move_possible(waiter) == False:
+                fields['LEFT'] = None
+        elif fields['RIGHT'].__class__.__name__ == 'Kitchen':
+            if fields['RIGHT'].check_if_next_move_possible(waiter) == False:
+                fields['RIGHT'] = None
+
+
+        if fields['UP'].__class__.__name__ == 'Table':
+            if fields['UP'].check_if_interaction_possible(waiter) == False:
+                fields['UP'] = None
+        elif fields['DOWN'].__class__.__name__ == 'Table':
+            if fields['DOWN'].check_if_interaction_possible(waiter) == False:
+                fields['DOWN'] = None
+        elif fields['LEFT'].__class__.__name__ == 'Table':
+            if fields['LEFT'].check_if_interaction_possible(waiter) == False:
+                fields['LEFT'] = None
+        elif fields['RIGHT'].__class__.__name__ == 'Table':
+            if fields['RIGHT'].check_if_interaction_possible(waiter) == False:
+                fields['RIGHT'] = None
