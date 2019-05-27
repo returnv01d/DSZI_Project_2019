@@ -1,6 +1,8 @@
 from model.carpet import Carpet
 from model.freeSpace import FreeSpace
 from model.move.move_type import MoveType
+from model.table import Table
+from model.kitchen import Kitchen
 
 
 class MoveFilter:
@@ -29,30 +31,11 @@ class MoveFilter:
             fields['RIGHT'] = None
         return fields
 
+    @staticmethod
     def check_interactions(fields, waiter):
+        for k, field in fields.items():
+            if field.__class__.__name__ == Table.__name__ or field.__class__.__name__ == Kitchen.__name__:
+                if not field.check_if_interaction_with_waiter_possible(waiter):
+                    fields[k] = None
 
-        if fields['UP'].__class__.__name__ == 'Kitchen':
-            if fields['UP'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['UP'] = None
-        elif fields['DOWN'].__class__.__name__ == 'Kitchen':
-            if fields['DOWN'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['RIGHT'] = None
-        elif fields['LEFT'].__class__.__name__ == 'Kitchen':
-            if fields['LEFT'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['LEFT'] = None
-        elif fields['RIGHT'].__class__.__name__ == 'Kitchen':
-            if fields['RIGHT'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['RIGHT'] = None
-
-        if fields['UP'].__class__.__name__ == 'Table':
-            if fields['UP'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['UP'] = None
-        elif fields['DOWN'].__class__.__name__ == 'Table':
-            if fields['DOWN'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['DOWN'] = None
-        elif fields['LEFT'].__class__.__name__ == 'Table':
-            if fields['LEFT'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['LEFT'] = None
-        elif fields['RIGHT'].__class__.__name__ == 'Table':
-            if fields['RIGHT'].check_if_interaction_with_waiter_possible(waiter) == False:
-                fields['RIGHT'] = None
+        return fields
