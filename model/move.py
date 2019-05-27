@@ -6,6 +6,7 @@ class Move:
         self.second_order = second_order
         self.target_table = target_table
         self.items = [first_order, second_order, target_table]
+        self.prediction_value = None
 
     def __repr__(self):
         return "{0} items: {1}".format(self.type, self.items)
