@@ -78,6 +78,3 @@ while True:
             fpsClock.tick(FPS)
         time.sleep(1.0)
 
-
-
-
