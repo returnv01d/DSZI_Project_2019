@@ -8,7 +8,6 @@ class MoveType(Enum):
     LEFT = 4
     TAKE_ORDER = 5
     SERVE_ORDER = 6
-    EMPTY_MOVE = 7
 
     @staticmethod
     def opposite_move(move):
