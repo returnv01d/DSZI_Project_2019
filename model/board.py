@@ -50,10 +50,16 @@ class Board:
 
         if self.kitchen.check_if_next_move_possible(self.waiter) == True:
             self.waiter.heldOrders.append(move.first_order)
-            # self.kitchen.waiting_orders.remove(move.first_order)
-            # self.kitchen.taken_orders.append(move.first_order)
+            self.kitchen.waiting_orders.remove(move.first_order)
+            self.kitchen.taken_orders.append(move.first_order)
             # print(self.waiter.heldOrders)
-            move.first_order.is_taken_from_kitchen = True
+
+            if len(move.items) == 1:
+                move.items[0].is_taken_from_kitchen = True
+            elif len(move.items) == 2:
+                move.items[0].is_taken_from_kitchen = True
+                move.items[1].is_taken_from_kitchen = True
+
 
             if len(self.waiter.heldOrders) == 1:
                 self.waiter.sprite.update_image_waiter(1)
@@ -104,13 +110,35 @@ class Board:
 
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
-        fields = self.get_possible_waiter_fields()
-        for field in fields:
-            field
+        fields = self.get_possible_waiter_fields(previous_move)
+
+        for j in fields:
+            if str(fields[j]) == "K":
+                possible_moves.extend(fields[j].get_moves_with_possible_combinations(self.waiter))
+            elif str(fields[j]) == "T":
+                possible_moves.append(fields[j].get_move_with_possible_combination(self.waiter))
+            elif str(fields[j]) == "C" and j == "DOWN":
+                move = Move(MoveType.DOWN)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "UP":
+                move = Move(MoveType.UP)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "RIGHT":
+                move = Move(MoveType.RIGHT)
+                possible_moves.append(move)
+            elif str(fields[j]) == "C" and j == "LEFT":
+                move = Move(MoveType.LEFT)
+                possible_moves.append(move)
+        # print(possible_moves)
+        return possible_moves
 
 
     def all_orders_served(self):
         if not self.waiter.heldOrders: # if waiter dont have any orders
+            print("I dont have any orders")
+            for table in self.tables:
+                print("table")
+                print(table.received_orders)
             if all(table.received_all_orders is True for table in self.tables): # and if all tables have their orders
                 if not self.kitchen.waiting_orders(): # and if there isn't any waiting order in kitchen
                     return True
