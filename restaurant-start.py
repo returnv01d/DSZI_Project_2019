@@ -1,58 +1,82 @@
-import pygame
 import sys
-from model.board import Board
+import time
+
+import pygame
 from pygame.locals import *
-from model.move import Move
-from model.move_type import MoveType
+
+from algorithms.dfs import DFS
+from model.move.move import Move
+from model.move.move_type import MoveType
+from model.order import Order
+from model.table import Table
 from serialization.board_loader import BoardLoader
 
 pygame.init()
 
-FPS = 30 # frames per second setting
-fpsClock = pygame.time.Clock()
-
+FPS = 30
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 BOARD_SIZE = 10
 BOARD_PATH = "boards/board1.txt"
+STEP_TIME = 0.6
 
-
+fpsClock = pygame.time.Clock()
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load('images/background_image.png')
-pygame.display.set_caption('Restaurant')
 
-board = BoardLoader.load_board_from_file('boards/board1.txt')
+# IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
+# YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.
+# ADD YOU ALGORITHM CLASS HERE.
+algorithms = [DFS]
 
-sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
 
-
-while True: # the main game loop
+while True:
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_UP:
-                board.move_waiter(MoveType.UP)
+                board.do(Move(MoveType.UP))
             if event.key == K_DOWN:
-                board.move_waiter(MoveType.DOWN)
+                board.do(Move(MoveType.DOWN))
             if event.key == K_RIGHT:
-                board.move_waiter(MoveType.RIGHT)
+                board.do(Move(MoveType.RIGHT))
             if event.key == K_LEFT:
-                board.move_waiter(MoveType.LEFT)
+                board.do(Move(MoveType.LEFT))
             if event.key == K_o:
-                board.take_dish_from_kitchen_to_waiter()
+                board.do(Move(MoveType.TAKE_ORDER, first_order=board.kitchen.orders[-1]))
             if event.key == K_p:
-                board.serve_dish_to_table_from_waiter()
+                print(DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE)))
 
+    for algo in algorithms:
+        board = BoardLoader.load_board_from_file('boards/new_board.txt')
 
-    DISPLAYSURF.blit(background_image, (0,0))
-    sprites.draw(DISPLAYSURF)
+        if algo == DFS:
+            DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
+        pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
+        solution = algo.soulution
+        solution = list(reversed(solution))
+        print("otrzymana solucja: ")
+        print(solution)
+        Order.id = 0
+        Table.id = 0
 
-    #Refresh Screen
-    pygame.display.flip()
-    fpsClock.tick(FPS)
+        animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
+        sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
+        pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(algo.name))
+        for i in range(len(solution)):
+            move = solution.pop()
+            pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(algo.name, move))
+            animation_board.do(move)
+            time.sleep(STEP_TIME)
+
+            DISPLAYSURF.blit(background_image, (0, 0))
+            sprites.draw(DISPLAYSURF)
+            pygame.display.flip()
+            fpsClock.tick(FPS)
+        time.sleep(1.0)
 
 
 
