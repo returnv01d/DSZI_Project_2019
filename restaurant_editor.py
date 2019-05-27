@@ -44,7 +44,7 @@ while True: # the main game loop
             if event.key == pygame.K_t:
                 new_object = Table()
             elif event.key == pygame.K_k:
-                new_object = Kitchen()
+                new_object = Kitchen([])
             elif event.key == pygame.K_c:
                 new_object = Carpet()
             elif event.key == pygame.K_f:
