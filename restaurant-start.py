@@ -55,10 +55,7 @@ while True: # the main game loop
             if event.key == K_p:
 
                 print("Waiter polozyl: {0} na stoliku {1}".format(board.waiter.heldOrders[0],board.waiter.heldOrders[0].table_id))
-                board.do(Move(MoveType.SERVE_ORDER, first_order= board.waiter.heldOrders[0], target_table= board.tables[board.waiter.heldOrders[0].table_id]))
-
-                board.do(Move(MoveType.SERVE_ORDER, first_order= board.kitchen.waiting_orders[0], target_table_id= board.tables[board.waiter.heldOrders[0].table_id]))
-
+                board.do(Move(MoveType.SERVE_ORDER, first_order= board.waiter.heldOrders[0], target_table_id= board.tables[board.waiter.heldOrders[0].table_id]))
 
     DISPLAYSURF.blit(background_image, (0,0))
     sprites.draw(DISPLAYSURF)
