@@ -34,7 +34,6 @@ class Table:
     def check_if_interaction_possible(self, waiter):
         if not set(waiter.heldOrders).isdisjoint(self.orders):
             return True
-
         return False
 
     def get_move_with_possible_combination(self, waiter):
@@ -51,3 +50,14 @@ class Table:
             move = Move(MoveType.SERVE_ORDER, ordersToThisTable[0], ordersToThisTable[1], self.id)
 
         return move
+
+
+    def get_order_from_waiter(self, order):
+        self.received_orders.append(order)
+        self.orders.remove(order)
+        if len(self.orders) == 0:
+            self.received_all_orders = True
+
+
+
+

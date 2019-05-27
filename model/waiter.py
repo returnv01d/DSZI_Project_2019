@@ -1,5 +1,6 @@
 from sprites.waiterSprite import WaiterSprite
 
+
 class Waiter:
     def __init__(self):
         self.sprite = None
@@ -32,3 +33,12 @@ class Waiter:
         if len(self.heldOrders) == 0:
             status.append("None")
             return status
+
+    def put_order_on_the_table(self, order):
+        if len(self.heldOrders) != 0:
+            self.heldOrders.remove(order)
+
+    def get_order_from_kitchen(self, order):
+        self.heldOrders.append(order)
+        print(self.heldOrders)
+
