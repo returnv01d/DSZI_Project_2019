@@ -23,13 +23,14 @@ background_image = pygame.image.load('images/background_image.png')
 pygame.display.set_caption('Restaurant')
 
 board = BoardLoader.load_board_from_file('boards/board1.txt')
+
 # solution = Best_first_search.best_first(board, [], Move(MoveType.EMPTY_MOVE))
 # print(solution)
+
 
 sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 print("hello in شروانشاه restaurant!!")
 print(board.objects)
-
 
 while True: # the main game loop
     for event in pygame.event.get():
@@ -38,6 +39,7 @@ while True: # the main game loop
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_UP:
+
                 board.do(Move(MoveType.UP))
             if event.key == K_DOWN:
                 board.do(Move(MoveType.DOWN))
@@ -51,8 +53,11 @@ while True: # the main game loop
                 print("Waiter trzyma: {0}".format(board.waiter.heldOrders))
                 print("W kuchni zostalo: {0}".format(board.kitchen.waiting_orders))
             if event.key == K_p:
+
                 print("Waiter polozyl: {0} na stoliku {1}".format(board.waiter.heldOrders[0],board.waiter.heldOrders[0].table_id))
                 board.do(Move(MoveType.SERVE_ORDER, first_order= board.waiter.heldOrders[0], target_table= board.tables[board.waiter.heldOrders[0].table_id]))
+
+                board.do(Move(MoveType.SERVE_ORDER, first_order= board.kitchen.waiting_orders[0], target_table_id= board.tables[board.waiter.heldOrders[0].table_id]))
 
 
     DISPLAYSURF.blit(background_image, (0,0))

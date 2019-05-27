@@ -65,6 +65,7 @@ class Kitchen:
             if len(listOfCombinations[0]) == 1:
                 move = Move(MoveType.TAKE_ORDER, listOfCombinations[i])
             listOfMoves.append(move)
+            
         print("get_moves_with_possible_combinations {0}".format(listOfMoves))
 
         return listOfMoves

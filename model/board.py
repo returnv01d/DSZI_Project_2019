@@ -69,7 +69,6 @@ class Board:
 
     def serve_dish_to_table_from_waiter(self, move):
         table = move.target_table
-        # order = items[1]
 
         if table.check_if_interaction_possible(self.waiter) == True:
 
@@ -82,30 +81,12 @@ class Board:
             if len(self.waiter.heldOrders) == 1:
                 self.waiter.sprite.update_image_waiter(1)
 
-    # def take_dish(self):
-    #     if len(self.waiter.heldOrders) == 0:
-    #         self.waiter.heldOrders.append()
-    #         self.waiter.listOfOrders.pop(0)
-    #         self.waiter.sprite.update_image_waiter(1)
-    #
-    #     elif len(self.waiter.heldOrders) == 1 and len(self.waiter.listOfOrders) != 0:
-    #         self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
-    #         self.waiter.listOfOrders.pop(0)
-    #         self.waiter.sprite.update_image_waiter(2)
-
-    # def put_dish_on_table(self, table_id, next_object):
-    #     for order in self.waiter.heldOrders:
-    #         if order.table_id == table_id:
-    #             self.waiter.heldOrders.remove(order)
-    #             self.waiter.sprite.update_image_waiter(len(self.waiter.heldOrders))
-    #             next_object.sprite.update_image()
-
     def get_possible_waiter_fields(self, previous_move):
         x = self.waiter.x
         y = self.waiter.y
 
         fields = {"LEFT" : self.object_at(x, y - 1), "RIGHT" : self.object_at(x, y + 1), "DOWN":self.object_at(x + 1, y ), "UP":self.object_at(x - 1, y)}
-        filtered = MoveFilter.filter_possible_moves(fields, previous_move)
+        filtered = MoveFilter.filter_possible_moves(fields, previous_move, self.waiter)
         return filtered
 
     def get_possible_waiter_moves(self, previous_move):
@@ -129,16 +110,12 @@ class Board:
             elif str(fields[j]) == "C" and j == "LEFT":
                 move = Move(MoveType.LEFT)
                 possible_moves.append(move)
-        # print(possible_moves)
-        return possible_moves
 
+        print(possible_moves)
+        return possible_moves
 
     def all_orders_served(self):
         if not self.waiter.heldOrders: # if waiter dont have any orders
-            print("I dont have any orders")
-            for table in self.tables:
-                print("table")
-                print(table.received_orders)
             if all(table.received_all_orders is True for table in self.tables): # and if all tables have their orders
                 if not self.kitchen.waiting_orders(): # and if there isn't any waiting order in kitchen
                     return True
@@ -175,15 +152,6 @@ class Board:
                 self.waiter.y += board_move_y
                 self.waiter.update_sprite_position(board_move_y, board_move_x)
                 # board.x is sprite.y because board.x means which row(height) we change.
-
-
-            # if next_object.__class__.__name__ == Kitchen.__name__:
-            #     self.take_dish()
-            #
-            # if next_object.__class__.__name__ == Table.__name__:
-            #     self.put_dish_on_table(next_object.id, next_object)
-
-            # print(self.get_possible_waiter_fields())
 
     def do(self, move):
         if move.type == MoveType.UP:
