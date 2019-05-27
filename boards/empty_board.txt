@@ -1,5 +1,9 @@
 10
 6 2
+3
+0 gulasz
+1 budyn
+2 kawa
 F F F F F F F F F F
 F F F F F F F F F F
 F F F F F F F F F F
