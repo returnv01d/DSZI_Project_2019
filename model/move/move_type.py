@@ -7,6 +7,7 @@ class MoveType(Enum):
     LEFT = 4
     TAKE_ORDER = 5
     SERVE_ORDER = 6
+    EMPTY_MOVE = 7
 
     @staticmethod
     def opposite_move(move):
@@ -18,3 +19,6 @@ class MoveType(Enum):
             return MoveType.RIGHT
         elif move.type == MoveType.RIGHT:
             return MoveType.LEFT
+
+    def __str__(self):
+        return "Type: {0}".format(str(self.name))
