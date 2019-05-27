@@ -10,11 +10,5 @@ class Order:
 
 
     def __repr__(self):
-        return "{0}-{1}".format(self.table_id, self.name)
+        return "table-id:{0}.order id:{1}, {2}".format(self.table_id, self.id ,self.name)
 
-
-
-    # def __eq__(self, other):
-    #     if other.id == self.id:
-    #         return True
-    #     return False

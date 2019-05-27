@@ -10,6 +10,7 @@ from model.move.move_type import MoveType
 from model.order import Order
 from model.table import Table
 from serialization.board_loader import BoardLoader
+from algorithms.best_first_search import Best_first_search
 
 pygame.init()
 
@@ -17,7 +18,7 @@ FPS = 30
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 BOARD_SIZE = 10
-BOARD_PATH = "boards/board1.txt"
+BOARD_PATH = "boards/new_board.txt"
 STEP_TIME = 0.6
 
 fpsClock = pygame.time.Clock()
@@ -77,4 +78,5 @@ while True:
             pygame.display.flip()
             fpsClock.tick(FPS)
         time.sleep(1.0)
+
 

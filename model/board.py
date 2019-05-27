@@ -138,6 +138,3 @@ class Board:
         # print("possible moves:")
         # print(self.get_possible_waiter_moves(move))
         return self
-
-
-
