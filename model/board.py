@@ -50,10 +50,16 @@ class Board:
 
         if self.kitchen.check_if_next_move_possible(self.waiter) == True:
             self.waiter.heldOrders.append(move.first_order)
-            # self.kitchen.waiting_orders.remove(move.first_order)
-            # self.kitchen.taken_orders.append(move.first_order)
+            self.kitchen.waiting_orders.remove(move.first_order)
+            self.kitchen.taken_orders.append(move.first_order)
             # print(self.waiter.heldOrders)
-            move.first_order.is_taken_from_kitchen = True
+
+            if len(move.items) == 1:
+                move.items[0].is_taken_from_kitchen = True
+            elif len(move.items) == 2:
+                move.items[0].is_taken_from_kitchen = True
+                move.items[1].is_taken_from_kitchen = True
+
 
             if len(self.waiter.heldOrders) == 1:
                 self.waiter.sprite.update_image_waiter(1)
@@ -63,7 +69,6 @@ class Board:
 
     def serve_dish_to_table_from_waiter(self, move):
         table = move.target_table
-        # order = items[1]
 
         if table.check_if_interaction_possible(self.waiter) == True:
 
@@ -76,24 +81,6 @@ class Board:
             if len(self.waiter.heldOrders) == 1:
                 self.waiter.sprite.update_image_waiter(1)
 
-    # def take_dish(self):
-    #     if len(self.waiter.heldOrders) == 0:
-    #         self.waiter.heldOrders.append()
-    #         self.waiter.listOfOrders.pop(0)
-    #         self.waiter.sprite.update_image_waiter(1)
-    #
-    #     elif len(self.waiter.heldOrders) == 1 and len(self.waiter.listOfOrders) != 0:
-    #         self.waiter.heldOrders.append(self.waiter.listOfOrders[0])
-    #         self.waiter.listOfOrders.pop(0)
-    #         self.waiter.sprite.update_image_waiter(2)
-
-    # def put_dish_on_table(self, table_id, next_object):
-    #     for order in self.waiter.heldOrders:
-    #         if order.table_id == table_id:
-    #             self.waiter.heldOrders.remove(order)
-    #             self.waiter.sprite.update_image_waiter(len(self.waiter.heldOrders))
-    #             next_object.sprite.update_image()
-
     def get_possible_waiter_fields(self, previous_move):
         x = self.waiter.x
         y = self.waiter.y
@@ -105,6 +92,7 @@ class Board:
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
         fields = self.get_possible_waiter_fields(previous_move)
+
         for j in fields:
             if str(fields[j]) == "K":
                 possible_moves.extend(fields[j].get_moves_with_possible_combinations(self.waiter))
@@ -122,10 +110,9 @@ class Board:
             elif str(fields[j]) == "C" and j == "LEFT":
                 move = Move(MoveType.LEFT)
                 possible_moves.append(move)
+
         print(possible_moves)
         return possible_moves
-
-
 
     def all_orders_served(self):
         if not self.waiter.heldOrders: # if waiter dont have any orders
@@ -165,15 +152,6 @@ class Board:
                 self.waiter.y += board_move_y
                 self.waiter.update_sprite_position(board_move_y, board_move_x)
                 # board.x is sprite.y because board.x means which row(height) we change.
-
-
-            # if next_object.__class__.__name__ == Kitchen.__name__:
-            #     self.take_dish()
-            #
-            # if next_object.__class__.__name__ == Table.__name__:
-            #     self.put_dish_on_table(next_object.id, next_object)
-
-            # print(self.get_possible_waiter_fields())
 
     def do(self, move):
         if move.type == MoveType.UP:

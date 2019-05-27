@@ -23,6 +23,7 @@ class BoardLoader:
 
         waiter.x = x
         waiter.y = y
+        # print(waiter.x, waiter.y)
 
         orders=[]
         orders_size = int(file.readline())
@@ -31,7 +32,6 @@ class BoardLoader:
             order = file.readline().split()
             orders.append(Order(int(order[0]),order[1]))
             # orders.append(Order(order[0],order[1]))
-
 
         #here you can test method get_possible_order_combinations from kitchen and get_move
         # ordersToServe = []
@@ -67,7 +67,8 @@ class BoardLoader:
                 elif object_letter == 'C':
                     new_object = Carpet()
                 elif object_letter == 'T':
-                    new_object = Table()
+                    new_object = Table(i, j)
+
 
                     this_table_orders = [order for order in orders if int(order.table_id) == int(new_object.id)]
 
@@ -76,11 +77,14 @@ class BoardLoader:
                 elif object_letter == 'K':
                     new_object = Kitchen(orders)
                     board.kitchen = new_object
+                    board.kitchen.x = i
+                    board.kitchen.y = j
+                    # print(board.kitchen.x, board.kitchen.y)
 
                 loaded_objects[i][j] = new_object
 
-        print(loaded_objects)
-        print(board.kitchen.waiting_orders)
+        # print(loaded_objects)
+        # print(board.kitchen.waiting_orders)
 
         board.objects = loaded_objects
         board.waiter = waiter
