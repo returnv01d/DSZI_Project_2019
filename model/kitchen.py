@@ -12,6 +12,8 @@ class Kitchen:
         self.sprite = None
         self.waiting_orders = orders
         self.taken_orders = []
+        self.x = None
+        self.y = None
 
     def create_sprite(self, width, height):
         self.sprite = KitchenSprite(width, height)
@@ -53,13 +55,17 @@ class Kitchen:
 
         return list(listOfCombinations)
 
-    def get_moves_with_possible_combinations(self):
+    def get_moves_with_possible_combinations(self, waiter):
         listOfCombinations = self.get_possible_order_combinations(waiter)
+        print(listOfCombinations)
         listOfMoves = []
         for i in range(len(listOfCombinations)):
-            move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
+            if len(listOfCombinations[0]) == 2:
+                move = Move(MoveType.TAKE_ORDER, listOfCombinations[i][0], listOfCombinations[i][1])
+            if len(listOfCombinations[0]) == 1:
+                move = Move(MoveType.TAKE_ORDER, listOfCombinations[i])
             listOfMoves.append(move)
-        print(listOfMoves)
+        print("get_moves_with_possible_combinations {0}".format(listOfMoves))
 
         return listOfMoves
 
