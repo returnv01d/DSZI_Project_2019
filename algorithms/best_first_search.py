@@ -6,7 +6,6 @@ class BestFirstSearch:
     soulution = None
     name = "DFS"
 
-
     @staticmethod
     def vector_displacement(move_type):
 
