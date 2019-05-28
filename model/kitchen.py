@@ -10,6 +10,8 @@ class Kitchen:
         self.sprite = None
         self.orders = orders
         self.given_orders = []
+        self.x = None
+        self.y = None
 
     def create_sprite(self, width, height):
         self.sprite = KitchenSprite(width, height)
