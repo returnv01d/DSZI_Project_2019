@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 
 from algorithms.dfs import DFS
+from algorithms.best_first_search import BestFirstSearch
 from model.move.move import Move
 from model.move.move_type import MoveType
 from model.order import Order
@@ -27,7 +28,7 @@ background_image = pygame.image.load('images/background_image.png')
 # IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
 # YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.
 # ADD YOU ALGORITHM CLASS HERE.
-algorithms = [DFS]
+algorithms = [BestFirstSearch]
 
 print("hello in شروانشاه restaurant!!")
 
@@ -53,8 +54,11 @@ while True:
     for algo in algorithms:
         board = BoardLoader.load_board_from_file('boards/new_board.txt')
 
-        if algo == DFS:
-            DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
+        # if algo == DFS:
+        #     DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
+        if algo == BestFirstSearch:
+            BestFirstSearch.best_first(board, [], [0], Move(MoveType.EMPTY_MOVE))
+
         pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
         solution = algo.soulution
         solution = list(reversed(solution))
