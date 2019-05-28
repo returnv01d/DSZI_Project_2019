@@ -17,6 +17,9 @@ class Board:
         self.kitchen = None
         self.tables = []
 
+    def __repr__(self):
+        return "board"
+
     def to_sprite_group(self, window_width, window_height):
         sprite_width = int(window_width / self.board_size)
         sprite_height = int(window_height / self.board_size)

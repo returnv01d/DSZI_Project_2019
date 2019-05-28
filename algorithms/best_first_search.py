@@ -20,17 +20,17 @@ class BestFirstSearch:
         elif move_type == "RIGHT":
             vector_after_move[1] = + 1
 
-        print(vector_after_move)
+        # print(vector_after_move)
         return vector_after_move
 
     @staticmethod
-    def vector_lenght(vector, x_f, x_s, y_f, y_s):
+    def vector_length(vector, x_f, x_s, y_f, y_s):
         vector[0] += x_f - x_s
         vector[1] += y_f - y_s
 
         prediction_value = float(math.sqrt(vector[0] * vector[0] + vector[1] * vector[1]))
 
-        print(prediction_value)
+        # print(prediction_value)
         return prediction_value
 
         # vector[0] += board.waiter.x - board.kitchen.x
@@ -43,48 +43,50 @@ class BestFirstSearch:
             # vector_to_possible_aim = [0, 0]
             if move.type.name == "SERVE_ORDER":
                 move.prediction_value = 0
-                print("Nadano wartosc: 0 SERVE_ORDER")
+                # print("Nadano wartosc: 0 SERVE_ORDER")
             elif move.type.name == "TAKE_ORDER":
                 move.prediction_value = 1
-                print("Nadano wartosc: 1 TAKE_ORDER")
+                # print("Nadano wartosc: 1 TAKE_ORDER")
             else:
                 vector = BestFirstSearch.vector_displacement(move.type.name)
-                print(vector)
+                # print(vector)
                 if not board.waiter.heldOrders:
 
-                    move.prediction_value = BestFirstSearch.vector_lenght(vector, board.waiter.x, board.kitchen.x,
+                    move.prediction_value = BestFirstSearch.vector_length(vector, board.waiter.x, board.kitchen.x,
                                                                           board.waiter.y,
                                                                           board.kitchen.y)
                 elif len(board.waiter.heldOrders) == 2:
                     # print(board.waiter.heldOrders)
                     distances = []
                     for table in board.tables:
+                        # print("position of table x: {0}, y: {1}".format(table.x, table.y))
                         # print(table)
                         # print(table.id)
                         # print(board.waiter.heldOrders[0].table_id)
                         # print(board.waiter.heldOrders[1].table_id)
                         if table.id == board.waiter.heldOrders[0].table_id or table.id == board.waiter.heldOrders[1].table_id:
-                            distances.extend(BestFirstSearch.vector_lenght(vector, board.waiter.x, table.x, board.waiter.y, table.y))
+                            distances.append(BestFirstSearch.vector_length(vector, board.waiter.x, table.x, board.waiter.y, table.y))
                     move.prediction_value = min(distances)
-                    print(move.prediction_value)
+                    # print(move.prediction_value)
                 elif len(board.waiter.heldOrders) == 1:
                     # print(board.waiter.heldOrders)
                     for table in board.tables:
+                        # print("position of table x: {0}, y: {1}".format(table.x, table.y))
                         # print(table)
                         # print(table.id)
                         # print(board.waiter.heldOrders[0].table_id)
                         # print(board.waiter.heldOrders[1].table_id)
                         if table.id == board.waiter.heldOrders[0].table_id:
-                            move.prediction_value = BestFirstSearch.vector_lenght(vector, board.waiter.x, table.x,
+                            move.prediction_value = BestFirstSearch.vector_length(vector, board.waiter.x, table.x,
                                                                                   board.waiter.y, table.y)
-                    print(move.prediction_value)
+                    # print(move.prediction_value)
 
     @staticmethod
-    def best_first(board, current_solution, all_moves, to_do_move, depth=0):
+    def best_first(board, current_solution, state, to_do_move, depth=0):
 
-        all_moves.pop(0)
+        state.pop(0)
 
-        print("all moves po wykonaniu {0}".format(all_moves))
+        print("state po wykonaniu {0}".format(state))
         if depth > 1000:
             print("przekroczono maksymalna glebokosc")
             return
@@ -104,15 +106,36 @@ class BestFirstSearch:
         possible_moves = []
         possible_moves = board.get_possible_waiter_moves(to_do_move)
 
-        # print(possible_moves)
+        print("possible moves {0}".format(possible_moves))
+        # print("position of waiter x: {0}, y: {1}".format(board.waiter.x, board.waiter.y))
+        # print("position of kitchen x: {0}, y: {1}".format(board.kitchen.x, board.kitchen.y))
 
         BestFirstSearch.count_heuristic(board, possible_moves)
 
-        all_moves.extend(possible_moves)
-        all_moves.sort(key=lambda move: move.prediction_value)
-
-        print("all_moves {0}".format(all_moves))
-
         board_copy = copy.deepcopy(board)
-        BestFirstSearch.best_first(copy.deepcopy(board_copy.do(all_moves[0])), new_solution, all_moves, all_moves[0],
+
+        for move in possible_moves:
+            state.append((move, board_copy))
+
+        state.sort(key = lambda state: state[0].prediction_value)
+
+        # all_moves.extend(possible_moves)
+        # all_moves.sort(key=lambda move: move.prediction_value)
+        #
+        # print("all_moves {0}".format(all_moves))
+        #
+        # state = []
+
+
+        print("posortowany state:")
+        print(state)
+        # print(state[0])
+        # print(state[0][0])
+
+
+        BestFirstSearch.best_first(copy.deepcopy(state[0][1].do(state[0][0])), new_solution, state, state[0][0],
                                    depth + 1)
+
+
+        # BestFirstSearch.best_first(copy.deepcopy(board_copy.do(all_moves[0])), new_solution, all_moves, all_moves[0],
+        #                            depth + 1)
