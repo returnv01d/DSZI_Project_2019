@@ -62,3 +62,4 @@ class BoardLoader:
 
         file.close()
         return board
+
