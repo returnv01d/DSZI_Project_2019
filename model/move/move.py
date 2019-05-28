@@ -6,9 +6,7 @@ class Move:
         self.first_order = first_order
         self.second_order = second_order
         self.target_table_id = target_table_id
-
         self.items = [first_order, second_order, target_table_id]
-
         self.prediction_value = None
 
 
