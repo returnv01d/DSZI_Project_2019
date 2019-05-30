@@ -4,6 +4,7 @@ import time
 import pygame
 from pygame.locals import *
 
+from algorithms.bfs import BFS
 from algorithms.dfs import DFS
 from model.move.move import Move
 from model.move.move_type import MoveType
@@ -27,7 +28,7 @@ background_image = pygame.image.load('images/background_image.png')
 # IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
 # YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.
 # ADD YOU ALGORITHM CLASS HERE.
-algorithms = [DFS]
+algorithms = [BFS]
 
 print("hello in شروانشاه restaurant!!")
 
@@ -55,6 +56,8 @@ while True:
 
         if algo == DFS:
             DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
+        if algo == BFS:
+            BFS.bfs(board, Move(MoveType.EMPTY_MOVE), [])
         pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
         solution = algo.soulution
         solution = list(reversed(solution))
