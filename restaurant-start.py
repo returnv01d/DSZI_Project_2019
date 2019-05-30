@@ -56,10 +56,10 @@ while True:
 
         if algo == DFS:
             DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-        if algo == BFS:
-            BFS.bfs(board, Move(MoveType.EMPTY_MOVE), [])
+        elif algo == BFS:
+            BFS.bfs(board, [], Move(MoveType.EMPTY_MOVE))
         pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
-        solution = algo.soulution
+        solution = algo.solution
         solution = list(reversed(solution))
         print("otrzymana solucja: ")
         print(solution)
