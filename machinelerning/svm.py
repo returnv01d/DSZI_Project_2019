@@ -1,10 +1,10 @@
 from sklearn import svm
 
 
-class MSV:
+class SVM:
 
     @staticmethod
-    def msv():
+    def svm():
         X = [[0, 0], [1, 1]]
         y = [0, 1]
         clf = svm.SVC(gamma='scale')

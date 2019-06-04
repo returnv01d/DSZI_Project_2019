@@ -6,6 +6,9 @@ from pygame.locals import *
 
 from algorithms.bfs import BFS
 from algorithms.dfs import DFS
+from machinelerning.decisionTree import DecisionTree
+from machinelerning.decisionTree1 import DecisionTree1
+from machinelerning.svm import SVM
 from model.move.move import Move
 from model.move.move_type import MoveType
 from model.order import Order
@@ -32,52 +35,5 @@ algorithms = [BFS]
 
 print("hello in شروانشاه restaurant!!")
 
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == KEYDOWN:
-            if event.key == K_UP:
-                board.do(Move(MoveType.UP))
-            if event.key == K_DOWN:
-                board.do(Move(MoveType.DOWN))
-            if event.key == K_RIGHT:
-                board.do(Move(MoveType.RIGHT))
-            if event.key == K_LEFT:
-                board.do(Move(MoveType.LEFT))
-            if event.key == K_o:
-                board.do(Move(MoveType.TAKE_ORDER, first_order=board.kitchen.orders[-1]))
-            if event.key == K_p:
-                print(DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE)))
-
-    for algo in algorithms:
-        board = BoardLoader.load_board_from_file('boards/new_board.txt')
-
-        if algo == DFS:
-            DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-        elif algo == BFS:
-            BFS.bfs(board, [], Move(MoveType.EMPTY_MOVE))
-        pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
-        solution = algo.solution
-        solution = list(reversed(solution))
-        print("otrzymana solucja: ")
-        print(solution)
-        Order.id = 0
-        Table.id = 0
-
-        animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
-        sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-        pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(algo.name))
-        for i in range(len(solution)):
-            move = solution.pop()
-            pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(algo.name, move))
-            animation_board.do(move)
-            time.sleep(STEP_TIME)
-
-            DISPLAYSURF.blit(background_image, (0, 0))
-            sprites.draw(DISPLAYSURF)
-            pygame.display.flip()
-            fpsClock.tick(FPS)
-        time.sleep(1.0)
-
+#SVM.svm()
+DecisionTree1.decisiontree1()
