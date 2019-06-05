@@ -1,8 +1,8 @@
 import copy
 class BFS:
     found_solution = False
+    soulution = None
     name = "BFS"
-    solution = None
     
     @staticmethod
     def bfs(board, current_solution, previous_move):
@@ -10,7 +10,7 @@ class BFS:
         while board.all_orders_served():
             queque.append(previous_move)
             BFS.found_solution = True
-            BFS.solution = queque
+            BFS.soulution = queque
             return queque
         queque.append(previous_move)
         for neighbour in board.get_possible_waiter_moves(previous_move):

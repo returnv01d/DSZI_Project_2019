@@ -59,7 +59,7 @@ while True:
         elif algo == BFS:
             BFS.bfs(board, [], Move(MoveType.EMPTY_MOVE))
         pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
-        solution = algo.solution
+        solution = algo.soulution
         solution = list(reversed(solution))
         print("otrzymana solucja: ")
         print(solution)
