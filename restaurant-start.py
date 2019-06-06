@@ -7,7 +7,6 @@ from pygame.locals import *
 from algorithms.bfs import BFS
 from algorithms.dfs import DFS
 from machinelerning.decisionTree import DecisionTree
-from machinelerning.decisionTree1 import DecisionTree1
 from machinelerning.svm import SVM
 from model.move.move import Move
 from model.move.move_type import MoveType
@@ -36,4 +35,4 @@ algorithms = [BFS]
 print("hello in شروانشاه restaurant!!\n")
 
 SVM.svm([1,1,1,0,5,0,0,3,0])
-DecisionTree1.decisiontree1([1,1,1,0,5,0,0,3,0])
+DecisionTree.decisiontree([1,1,1,0,5,0,0,3,0])
