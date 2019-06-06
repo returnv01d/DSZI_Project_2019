@@ -4,7 +4,7 @@ class ReadFromFile:
     def read_features_from_file(filepath):
         file = open(filepath, 'r')
         listOfFeatures = []
-        for i in range(0, 24):
+        for i in range(0, 28):
             line = file.readline().split(';')
             newline = list(map(int, line[0].split(',')))
             listOfFeatures.append(newline)

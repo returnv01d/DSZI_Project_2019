@@ -22,3 +22,7 @@ down
 down
 down
 serve-order
+up
+left
+left
+up

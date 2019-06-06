@@ -34,5 +34,16 @@ algorithms = [BFS]
 
 print("hello in شروانشاه restaurant!!\n")
 
-SVM.svm([1,1,1,0,5,0,0,3,0])
-DecisionTree.decisiontree([1,1,1,0,5,0,0,3,0])
+#0-FreeSpace, 1-Carpet, 2-Kitchen, 3-Table, 5-Waiter
+#SVM.svm([1,1,1,0,5,0,0,3,0])
+#
+DecisionTree.decisiontree([0,2,0,1,5,0,1,0,0])
+DecisionTree.decisiontree([0,0,2,0,5,1,0,1,0])
+DecisionTree.decisiontree([0,1,1,0,5,0,0,1,0])
+DecisionTree.decisiontree([0,1,0,0,5,0,0,3,0])
+
+
+# SVM.svm([0,2,0,1,5,0,1,0,0])
+# SVM.svm([0,0,2,0,5,1,0,1,0])
+# SVM.svm([0,1,1,0,5,0,0,1,0])
+# SVM.svm([0,1,0,0,5,0,0,3,0])

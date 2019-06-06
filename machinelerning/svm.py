@@ -25,4 +25,4 @@ class SVM:
         y_pred = svclassifier.predict(X_test)
 
         warnings.filterwarnings('ignore')
-        print('Raport SVM: ', classification_report(y_test, y_pred))
+        #print('Raport SVM: ', classification_report(y_test, y_pred))
