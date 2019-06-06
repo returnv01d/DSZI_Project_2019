@@ -33,7 +33,7 @@ background_image = pygame.image.load('images/background_image.png')
 # ADD YOU ALGORITHM CLASS HERE.
 algorithms = [BFS]
 
-print("hello in شروانشاه restaurant!!")
+print("hello in شروانشاه restaurant!!\n")
 
-#SVM.svm()
-DecisionTree1.decisiontree1()
+SVM.svm([1,1,1,0,5,0,0,3,0])
+DecisionTree1.decisiontree1([1,1,1,0,5,0,0,3,0])
