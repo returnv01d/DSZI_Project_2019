@@ -11,4 +11,5 @@ class DecisionTree:
         labels = ReadFromFile.read_labels_from_file('learnDataLabels.txt')
         clf = tree.DecisionTreeClassifier()
         clf = clf.fit(features, labels)
-        print('Decision Tree method - Waiter move: ', clf.predict([example]))
+        return clf.predict([example])
+        #print('Decision Tree method - Waiter move: ', clf.predict([example]))

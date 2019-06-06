@@ -7,7 +7,6 @@ from pygame.locals import *
 from algorithms.bfs import BFS
 from algorithms.dfs import DFS
 from machinelerning.decisionTree import DecisionTree
-from machinelerning.svm import SVM
 from model.move.move import Move
 from model.move.move_type import MoveType
 from model.order import Order
@@ -27,21 +26,42 @@ fpsClock = pygame.time.Clock()
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load('images/background_image.png')
 
-# IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
-# YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.
-# ADD YOU ALGORITHM CLASS HERE.
-algorithms = [BFS]
-
-print("hello in شروانشاه restaurant!!\n")
-
 #0-FreeSpace, 1-Carpet, 2-Kitchen, 3-Table, 5-Waiter
 #SVM.svm([1,1,1,0,5,0,0,3,0])
 #
-DecisionTree.decisiontree([0,2,0,1,5,0,1,0,0])
-DecisionTree.decisiontree([0,0,2,0,5,1,0,1,0])
-DecisionTree.decisiontree([0,1,1,0,5,0,0,1,0])
-DecisionTree.decisiontree([0,1,0,0,5,0,0,3,0])
+board = BoardLoader.load_board_from_file('boards/new_board.txt')
+animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
+sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 
+paths = []
+paths.append([0,2,0,1,5,0,1,0,0])
+paths.append([0,0,2,0,5,1,0,1,0])
+paths.append([0,1,1,0,5,0,0,1,0])
+
+for i in paths:
+    move = Move(MoveType.UP)
+    if DecisionTree.decisiontree([0,2,0,1,5,0,1,0,0]) == 'down':
+        move = Move(MoveType.DOWN)
+    elif DecisionTree.decisiontree([0,2,0,1,5,0,1,0,0]) == 'left':
+        move = Move(MoveType.LEFT)
+    elif DecisionTree.decisiontree([0,2,0,1,5,0,1,0,0]) == 'up':
+        move = Move(MoveType.UP)
+    elif DecisionTree.decisiontree([0,2,0,1,5,0,1,0,0]) == 'right':
+        move = Move(MoveType.RIGHT)
+
+    time.sleep(3.0)
+    animation_board.do(move)
+    time.sleep(STEP_TIME)
+
+    DISPLAYSURF.blit(background_image, (0, 0))
+    sprites.draw(DISPLAYSURF)
+    pygame.display.flip()
+    fpsClock.tick(FPS)
+    time.sleep(3.0)
+
+print(DecisionTree.decisiontree([0,0,2,0,5,1,0,1,0]))
+print(DecisionTree.decisiontree([0,1,1,0,5,0,0,1,0]))
+print(DecisionTree.decisiontree([0,1,0,0,5,0,0,3,0]))
 
 # SVM.svm([0,2,0,1,5,0,1,0,0])
 # SVM.svm([0,0,2,0,5,1,0,1,0])
