@@ -31,7 +31,7 @@ animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
 sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 
 #you can change machinelearning: decision-tree, svm, svm-raport
-machinelearning = 'decision-tree'
+machinelearning = 'svm'
 
 if machinelearning =='decision-tree':
 

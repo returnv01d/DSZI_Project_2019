@@ -25,7 +25,7 @@ background_image = pygame.image.load('images/background_image.png')
 
 labels = []
 features = []
-algorithms = [BFS]
+algorithms = [DFS]
 
 print("hello in شروانشاه restaurant!!")
 
