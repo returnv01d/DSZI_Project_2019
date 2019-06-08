@@ -7,8 +7,8 @@ class DecisionTree:
 
     @staticmethod
     def decisiontree(example):
-        features = ReadFromFile.read_features_from_file('learnDataFeatures.txt')
-        labels = ReadFromFile.read_labels_from_file('learnDataLabels.txt')
+        features = ReadFromFile.read_features_from_file('trainingFeatures.txt')
+        labels = ReadFromFile.read_labels_from_file('trainingDataLabels.txt')
         clf = tree.DecisionTreeClassifier()
         clf = clf.fit(features, labels)
         return clf.predict([example])

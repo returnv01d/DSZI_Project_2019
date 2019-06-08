@@ -82,5 +82,5 @@ for i in labels:
 featuresFile = open("trainingFeatures.txt", "a")
 for i in features:
     for j in i:
-        featuresFile.write(str(j)+" ")
-    featuresFile.write("\n")
+        featuresFile.write(str(j))
+    featuresFile.write('\n')

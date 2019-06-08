@@ -12,8 +12,8 @@ class SVM:
 
     @staticmethod
     def svm(example):
-        X = ReadFromFile.read_features_from_file('learnDataFeatures.txt')
-        y = ReadFromFile.read_labels_from_file('learnDataLabels.txt')
+        X = ReadFromFile.read_features_from_file('trainingFeatures.txt')
+        y = ReadFromFile.read_labels_from_file('trainingDataLabels.txt')
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
         clf = svm.SVC(gamma='scale')
