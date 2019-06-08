@@ -73,9 +73,48 @@ class Board:
         filtered = MoveFilter.filter_possible_moves(fields, previous_move, self.waiter)
         return filtered
 
+    def updatePosition(self, move):
+        if 0 <= move.type.value <= 4:
+            self.move_waiter(move.type)
+
+        return self
+
+
+    def get_training_set(self, move):
+        x = self.waiter.x
+        y = self.waiter.y
+
+        features = []
+        features.append(self.object_at(x - 1, y - 1)) #LEFT UP
+        features.append(self.object_at(x - 1, y)) #UP
+        features.append(self.object_at(x - 1, y + 1)) #RIGHT UP
+        features.append(self.object_at(x, y - 1))  #LEFT
+        features.append(self.waiter) #WAITER
+        features.append(self.object_at(x, y + 1)) #RIGHT
+        features.append(self.object_at(x + 1, y - 1)) #DOWN LEFT
+        features.append(self.object_at(x + 1, y)) #DOWN
+        features.append(self.object_at(x + 1, y + 1)) #DOWN RIGHT
+
+        convertedToIntFeatures = []
+        for i in features:
+            if str(i) == "F":
+                convertedToIntFeatures.append(0)
+            elif str(i) == 'K':
+                convertedToIntFeatures.append(2)
+            elif str(i) == 'Waiter':
+                convertedToIntFeatures.append(5)
+            elif str(i) == 'C':
+                convertedToIntFeatures.append(1)
+            elif str(i) == 'T':
+                convertedToIntFeatures.append(3)
+
+        self.updatePosition(move)
+        return convertedToIntFeatures
+
     def get_possible_waiter_moves(self, previous_move):
         possible_moves = []
         fields = self.get_possible_waiter_fields(previous_move)
+
         for direction, field in fields.items():
             if field.__class__.__name__ == Carpet.__name__:
                 possible_moves.append(Move(MoveType[direction]))

@@ -1,7 +1,7 @@
 import copy
 class DFS:
     found_solution = False
-    soulution = None
+    solution = None
     name = "DFS"
 
     @staticmethod
@@ -21,7 +21,7 @@ class DFS:
             # print("returning solution:")
             # print(new_solution)
             DFS.found_solution = True
-            DFS.soulution = new_solution
+            DFS.solution = new_solution
             return new_solution
         new_solution.append(previous_move)
 
