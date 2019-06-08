@@ -1,17 +1,46 @@
+import warnings
+
 from sklearn import svm
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report, confusion_matrix
+
+from machinelerning.readFromFile import ReadFromFile
 
 
 class SVM:
 
     @staticmethod
-    def svm():
-        X = [[0, 0], [1, 1]]
-        y = [0, 1]
-        clf = svm.SVC(gamma='scale')
-        clf.fit(X, y)
-        svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-            decision_function_shape='ovr', degree=3, gamma='scale', kernel='rbf',
-            max_iter=-1, probability=False, random_state=None, shrinking=True,
-            tol=0.001, verbose=False)
+    def svm(example):
+        X = ReadFromFile.read_features_from_file('learnDataFeatures.txt')
+        y = ReadFromFile.read_labels_from_file('learnDataLabels.txt')
 
-        print(clf.predict([[2., 2.]]))
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
+        clf = svm.SVC(gamma='scale')
+        clf.fit(X_train, y_train)
+        #print ('Support Vector Machines method - Waiter move:', clf.predict([example]))
+
+        svclassifier = SVC(kernel='linear')
+        svclassifier.fit(X_train, y_train)
+        y_pred = svclassifier.predict(X_test)
+
+        warnings.filterwarnings('ignore')
+        #print('Raport SVM: ', classification_report(y_test, y_pred))
+        return clf.predict([example])
+
+    @staticmethod
+    def svm_raport(example):
+        X = ReadFromFile.read_features_from_file('learnDataFeatures.txt')
+        y = ReadFromFile.read_labels_from_file('learnDataLabels.txt')
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
+        clf = svm.SVC(gamma='scale')
+        clf.fit(X_train, y_train)
+        print ('Support Vector Machines method - Waiter move:', clf.predict([example]))
+
+        svclassifier = SVC(kernel='linear')
+        svclassifier.fit(X_train, y_train)
+        y_pred = svclassifier.predict(X_test)
+
+        warnings.filterwarnings('ignore')
+        print('Raport SVM: ', classification_report(y_test, y_pred))

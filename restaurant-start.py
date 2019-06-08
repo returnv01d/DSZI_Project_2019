@@ -4,12 +4,10 @@ import time
 import pygame
 from pygame.locals import *
 
-from algorithms.bfs import BFS
-from algorithms.dfs import DFS
+from machinelerning.decisionTree import DecisionTree
+from machinelerning.svm import SVM
 from model.move.move import Move
 from model.move.move_type import MoveType
-from model.order import Order
-from model.table import Table
 from serialization.board_loader import BoardLoader
 
 pygame.init()
@@ -25,52 +23,37 @@ fpsClock = pygame.time.Clock()
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load('images/background_image.png')
 
-labels = []
-features = []
-algorithms = [BFS]
-
-print("hello in شروانشاه restaurant!!")
+#0-FreeSpace, 1-Carpet, 2-Kitchen, 3-Table, 5-Waiter
 
 
-def convertMoveToLabel(move):
-    moveType = move.type
-    if moveType == moveType.LEFT:
-        labels.append('left')
-    elif moveType == moveType.RIGHT:
-        labels.append('right')
-    elif moveType == moveType.UP:
-        labels.append('up')
-    elif moveType == moveType.DOWN:
-        labels.append('down')
-    elif moveType == moveType.SERVE_ORDER:
-        labels.append('serve_order')
+board = BoardLoader.load_board_from_file('boards/new_board.txt')
+animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
+sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
 
+#you can change machinelearning: decision-tree, svm, svm-raport
+machinelearning = 'svm'
 
-for algo in algorithms:
-    board = BoardLoader.load_board_from_file('boards/new_board.txt')
-    if algo == DFS:
-        DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-    elif algo == BFS:
-        BFS.bfs(board, [], Move(MoveType.EMPTY_MOVE))
-    pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
-    solution = algo.solution
-    solution = list(reversed(solution))
+if machinelearning =='decision-tree':
 
-    # print("otrzymana solucja: ")
-    # print(solution)
-    Order.id = 0
-    Table.id = 0
-    animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
-    sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-    pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(algo.name))
-    move = Move(MoveType.EMPTY_MOVE)
-    for i in range(len(solution)):
-        previous_move = move
-        move = solution.pop()
-        pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(algo.name, move))
-        convertMoveToLabel(move)
-        if move.type != MoveType.EMPTY_MOVE and move.type != MoveType.TAKE_ORDER:
-            features.append(board.get_training_set(move))
+    print("Decision tree - waiter moves: ")
+    paths = []
+    paths.append([0,2,0,1,5,1,0,0,0])
+    paths.append([0,0,2,1,5,1,1,0,0])
+    paths.append([0,0,0,0,5,1,0,1,0])
+    paths.append([0,1,1,0,5,0,0,1,0])
+
+    for i in range(0, 4):
+        move = Move(MoveType.UP)
+        if DecisionTree.decisiontree(paths[i]) == 'down':
+            move = Move(MoveType.DOWN)
+        elif DecisionTree.decisiontree(paths[i]) == 'left':
+            move = Move(MoveType.LEFT)
+        elif DecisionTree.decisiontree(paths[i]) == 'up':
+            move = Move(MoveType.UP)
+        elif DecisionTree.decisiontree(paths[i]) == 'right':
+            move = Move(MoveType.RIGHT)
+
+        time.sleep(2.0)
         animation_board.do(move)
         time.sleep(STEP_TIME)
 
@@ -78,14 +61,46 @@ for algo in algorithms:
         sprites.draw(DISPLAYSURF)
         pygame.display.flip()
         fpsClock.tick(FPS)
-    time.sleep(1.0)
+        time.sleep(3.0)
 
-labelsFile = open("trainingDataLabels.txt", "w+")
-for i in labels:
-     labelsFile.write(i+"\n")
+    print(DecisionTree.decisiontree([0,2,0,1,5,1,0,0,0]))
+    print(DecisionTree.decisiontree([0,0,2,1,5,1,1,0,0]))
+    print(DecisionTree.decisiontree([0,0,0,0,5,1,0,1,0]))
+    print(DecisionTree.decisiontree([0,1,1,0,5,0,0,1,0]))
 
-featuresFile = open("trainingFeatures.txt", "w+")
-for i in features:
-    for j in i:
-        featuresFile.write(str(j)+" ")
-    featuresFile.write("\n")
+elif machinelearning == 'svm':
+    print("Support vestor machines - waiter moves: ")
+    paths = []
+    paths.append([0, 2, 0, 1, 5, 1, 0, 0, 0])
+    paths.append([0, 0, 2, 1, 5, 1, 1, 0, 0])
+    paths.append([0, 0, 0, 0, 5, 1, 0, 1, 0])
+    paths.append([0, 1, 1, 0, 5, 0, 0, 1, 0])
+
+    for i in range(0, 4):
+        move = Move(MoveType.UP)
+        if SVM.svm(paths[i]) == 'down':
+            move = Move(MoveType.DOWN)
+        elif SVM.svm(paths[i]) == 'left':
+            move = Move(MoveType.LEFT)
+        elif SVM.svm(paths[i]) == 'up':
+            move = Move(MoveType.UP)
+        elif SVM.svm(paths[i]) == 'right':
+            move = Move(MoveType.RIGHT)
+
+        time.sleep(2.0)
+        animation_board.do(move)
+        time.sleep(STEP_TIME)
+
+        DISPLAYSURF.blit(background_image, (0, 0))
+        sprites.draw(DISPLAYSURF)
+        pygame.display.flip()
+        fpsClock.tick(FPS)
+        time.sleep(3.0)
+
+    print(SVM.svm([0, 2, 0, 1, 5, 1, 0, 0, 0]))
+    print(SVM.svm([0, 0, 2, 1, 5, 1, 1, 0, 0]))
+    print(SVM.svm([0, 0, 0, 0, 5, 1, 0, 1, 0]))
+    print(SVM.svm([0, 1, 1, 0, 5, 0, 0, 1, 0]))
+
+elif machinelearning =='svm-raport':
+    SVM.svm_raport([0, 2, 0, 1, 5, 1, 0, 0, 0])
