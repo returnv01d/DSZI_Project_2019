@@ -18,8 +18,8 @@ class DFS:
         new_solution = list(current_solution)
         if board.all_orders_served():
             new_solution.append(previous_move)
-            # print("returning solution:")
-            # print(new_solution)
+            print("returning solution:")
+            print(new_solution)
             DFS.found_solution = True
             DFS.soulution = new_solution
             return new_solution

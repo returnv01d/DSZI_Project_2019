@@ -55,7 +55,7 @@ class BoardLoader:
 
                 loaded_objects[i][j] = new_object
 
-        print(loaded_objects)
+        # print(loaded_objects)
 
         board.objects = loaded_objects
         board.waiter = waiter

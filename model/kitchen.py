@@ -18,7 +18,7 @@ class Kitchen:
         self.sprite.update_status(self.statuses())
 
     def __repr__(self):
-        return "Kitchen"
+        return f"Kitchen: given_orders: {self.given_orders}, orders: {self.orders}"
 
     def __str__(self):
         return 'K'

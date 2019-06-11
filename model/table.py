@@ -21,7 +21,7 @@ class Table:
         self.sprite.update_status(self.status())
 
     def __repr__(self):
-        return "Table"
+        return f"Table {self.id} received_orders: {self.received_orders}, all_orders: {self.orders}"
 
     def __str__(self):
         return 'T'

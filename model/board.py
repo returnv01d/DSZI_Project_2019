@@ -11,7 +11,7 @@ from model.table import Table
 class Board:
     def __init__(self, board_size):
         self.board_size = board_size
-
+        self.previous_move = None
         self.objects = []
         self.waiter = None
         self.kitchen = None
@@ -137,4 +137,10 @@ class Board:
         # print("kitchen: is interaction possible? {0}".format(self.kitchen.check_if_interaction_with_waiter_possible(self.waiter)))
         # print("possible moves:")
         # print(self.get_possible_waiter_moves(move))
+        self.previous_move = move
         return self
+
+    def __repr__(self):
+        return(f"BOARD - Prev move: {self.previous_move}, {repr(self.waiter)}, {repr(self.kitchen)}, {self.tables}")
+
+

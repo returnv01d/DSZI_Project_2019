@@ -1,3 +1,4 @@
+import copy
 import sys
 import time
 
@@ -19,7 +20,7 @@ WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 BOARD_SIZE = 10
 BOARD_PATH = "boards/board1.txt"
-STEP_TIME = 0.6
+STEP_TIME = 0.1
 
 fpsClock = pygame.time.Clock()
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
@@ -28,7 +29,7 @@ background_image = pygame.image.load('images/background_image.png')
 # IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
 # YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.
 # ADD YOU ALGORITHM CLASS HERE.
-algorithms = [BestFirstSearch]
+algorithms = [BestFirstSearch, DFS]
 
 print("hello in شروانشاه restaurant!!")
 
@@ -52,21 +53,24 @@ while True:
                 print(DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE)))
 
     for algo in algorithms:
-        board = BoardLoader.load_board_from_file('boards/new_board.txt')
-
-        # if algo == DFS:
-        #     DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-        if algo == BestFirstSearch:
-            BestFirstSearch.best_first(board, [], [0], Move(MoveType.EMPTY_MOVE))
-
-        pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
-        solution = algo.soulution
-        solution = list(reversed(solution))
-        print("otrzymana solucja: ")
-        print(solution)
+        board = None
         Order.id = 0
         Table.id = 0
-
+        board = copy.deepcopy(BoardLoader.load_board_from_file('boards/new_board.txt'))
+        print(algo)
+        if algo == DFS:
+            print("dfsik")
+            DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
+            solution = DFS.soulution
+        elif algo == BestFirstSearch:
+            BestFirstSearch.best_first(board, [], [], Move(MoveType.EMPTY_MOVE))
+            solution = BestFirstSearch.soulution
+        pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
+        solution = list(reversed(solution))
+        print("otrzymana solucja: ")
+        print(list(reversed(solution)))
+        Order.id = 0
+        Table.id = 0
         animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
         sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
         pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(algo.name))

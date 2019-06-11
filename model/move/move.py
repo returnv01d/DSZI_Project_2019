@@ -11,4 +11,4 @@ class Move:
 
 
     def __repr__(self):
-        return "{0} items: {1}".format(self.type, self.items)
+        return "{0} items: {1} pred_value: {2}".format(self.type, self.items, self.prediction_value)

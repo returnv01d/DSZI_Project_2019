@@ -1,15 +1,16 @@
 10
-6 2
-2
+6 4
+3
 0 gulasz
 1 sernik
+2 bliny
 F F F F F F F F F F 
 F F F F F F F F F F 
 F F F T C C C K F F 
 F F F F F F C F F F
+F F F F F F C T F F
+F F F F F F C F F F
 F F F F F F T F F F
-F F F F F F F F F F 
-F F F F F F F F F F 
 F F F F F F F F F F 
 F F F F F F F F F F 
 F F F F F F F F F F 
