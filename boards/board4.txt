@@ -1,0 +1,17 @@
+10
+6 5
+4
+0 gofry
+1 cappucino
+2 sok
+3 makowiec
+F F F F F F F F F F
+F T F F F F F F F F
+F C C C F F C F F F
+F F F C C C C F F F
+F F C C F F F F F F
+T C C F F F C K F F
+F F C F C C C F F F
+F F C C C F T F F F
+F F T F F F F F F F
+F F F F F F F F F F

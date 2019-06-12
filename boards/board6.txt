@@ -1,0 +1,17 @@
+10
+5 7
+4
+0 pizza
+1 zapiekanka
+2 lody
+3 zupa
+F F F F F F F F F F
+F F T F F F F F F F
+F F C F F F F F F F
+F F C F F F F F T F
+F F C C F F F C C F
+F F F C C C F C F F
+F F F C F C C C T F
+F T C C F C F F F F
+F F F F F K F F F F
+F F F F F F F F F F
