@@ -22,7 +22,7 @@ class Waiter:
         self.sprite.rect.y = self.sprite.rect.height * self.x
 
     def __repr__(self):
-        return "Waiter"
+        return f"Waiter heldOrders: {self.heldOrders}, x: {self.x}, y: {self.y}"
 
     def give_order(self, order):
         my_order = [ord for ord in self.heldOrders if ord.table_id == order.table_id and ord.name == order.name][0]

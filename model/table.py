@@ -5,7 +5,7 @@ from sprites.tableSprite import TableSprite
 class Table:
     id = 0
 
-    def __init__(self):
+    def __init__(self, x, y):
         self.id = Table.id
         Table.id += 1
 
@@ -13,13 +13,15 @@ class Table:
         self.orders = []
         self.received_orders = []
         self.sprite = None
+        self.x = x
+        self.y = y
 
     def create_sprite(self, width, height):
         self.sprite = TableSprite(width, height)
         self.sprite.update_status(self.status())
 
     def __repr__(self):
-        return "Table"
+        return f"Table {self.id} received_orders: {self.received_orders}, all_orders: {self.orders}"
 
     def __str__(self):
         return 'T'

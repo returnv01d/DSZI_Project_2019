@@ -10,13 +10,15 @@ class Kitchen:
         self.sprite = None
         self.orders = orders
         self.given_orders = []
+        self.x = None
+        self.y = None
 
     def create_sprite(self, width, height):
         self.sprite = KitchenSprite(width, height)
         self.sprite.update_status(self.statuses())
 
     def __repr__(self):
-        return "Kitchen"
+        return f"Kitchen: given_orders: {self.given_orders}, orders: {self.orders}"
 
     def __str__(self):
         return 'K'

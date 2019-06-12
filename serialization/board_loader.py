@@ -41,7 +41,8 @@ class BoardLoader:
                 elif object_letter == 'C':
                     new_object = Carpet()
                 elif object_letter == 'T':
-                    new_object = Table()
+                    new_object = Table(i, j)
+
 
                     this_table_orders = [order for order in orders if order.table_id == new_object.id]
                     new_object.orders.extend(this_table_orders)
@@ -49,10 +50,12 @@ class BoardLoader:
                 elif object_letter == 'K':
                     new_object = Kitchen(orders)
                     board.kitchen = new_object
+                    board.kitchen.x = i
+                    board.kitchen.y = j
 
                 loaded_objects[i][j] = new_object
 
-        print(loaded_objects)
+        # print(loaded_objects)
 
         board.objects = loaded_objects
         board.waiter = waiter
