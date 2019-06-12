@@ -5,6 +5,7 @@ import time
 import pygame
 from pygame.locals import *
 
+from algorithms.bfs import BFS
 from algorithms.dfs import DFS
 from algorithms.best_first_search import BestFirstSearch
 from model.move.move import Move
@@ -61,10 +62,13 @@ while True:
         if algo == DFS:
             print("dfsik")
             DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-            solution = DFS.soulution
+
+        elif algo == BFS:
+
         elif algo == BestFirstSearch:
             BestFirstSearch.best_first(board, [], [], Move(MoveType.EMPTY_MOVE))
             solution = BestFirstSearch.soulution
+
         pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
         solution = list(reversed(solution))
         print("otrzymana solucja: ")
