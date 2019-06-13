@@ -1,13 +1,13 @@
 from enum import Enum
 
 class MoveType(Enum):
-    EMPTY_MOVE = 0
-    UP = 1
-    DOWN = 2
-    RIGHT = 3
-    LEFT = 4
-    TAKE_ORDER = 5
-    SERVE_ORDER = 6
+    UP = 0
+    DOWN = 1
+    RIGHT = 2
+    LEFT = 3
+    TAKE_ORDER = 4
+    SERVE_ORDER = 5
+    EMPTY_MOVE = 6
 
     @staticmethod
     def opposite_move(move):

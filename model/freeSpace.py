@@ -13,3 +13,6 @@ class FreeSpace:
 
     def __str__(self):
         return 'F'
+
+    def num(self):
+        return 1

@@ -22,7 +22,16 @@ class Waiter:
         self.sprite.rect.y = self.sprite.rect.height * self.x
 
     def __repr__(self):
-        return "Waiter"
+        pref = "|Waiter "
+        if not self.heldOrders:
+            return pref + "heldOrders0:-1 heldOrders1:-1 "
+        if len(self.heldOrders) == 1:
+            return pref + f"heldOrders0:{self.heldOrders[0].table_id} heldOrders1:-1 "
+        else:
+            return pref + f"heldOrders0:{self.heldOrders[0].table_id} heldOrders1:{self.heldOrders[1].table_id} "
+
+    def num(self):
+        return 4
 
     def give_order(self, order):
         my_order = [ord for ord in self.heldOrders if ord.table_id == order.table_id and ord.name == order.name][0]

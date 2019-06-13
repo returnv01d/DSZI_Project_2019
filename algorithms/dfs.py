@@ -14,19 +14,22 @@ class DFS:
             return
         # print()
         # print("dfs {0}.all orders served? {1}".format(str(depth), board.all_orders_served()))
+        state = ""
+        for i, movee in enumerate(board.get_possible_waiter_moves(previous_move)):
+            state += f"{i}:{movee.type.value} "
 
         new_solution = list(current_solution)
         if board.all_orders_served():
-            new_solution.append(previous_move)
+            new_solution.append([previous_move, state])
             # print("returning solution:")
             # print(new_solution)
             DFS.found_solution = True
             DFS.soulution = new_solution
             return new_solution
-        new_solution.append(previous_move)
+        new_solution.append([previous_move, state])
 
-        # print("current solution: {0}".format(new_solution))
         # print("possible moves: {0}".format(board.get_possible_waiter_moves(previous_move)))
+        # print("current solution: {0}".format(new_solution))
         for move in board.get_possible_waiter_moves(previous_move):
             # print("dfs {0} doing move {1}".format(str(depth), move))
             board_copy = copy.deepcopy(board)

@@ -19,7 +19,7 @@ WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 BOARD_SIZE = 10
 BOARD_PATH = "boards/board1.txt"
-STEP_TIME = 0.6
+STEP_TIME = 0.1
 
 fpsClock = pygame.time.Clock()
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
@@ -52,18 +52,22 @@ while True:
                 print(DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE)))
 
     for algo in algorithms:
-        Order.id = 0
-        Table.id = 0
         board = BoardLoader.load_board_from_file('boards/new_board.txt')
+
+        print()
         print(repr(board))
+
+
         if algo == DFS:
-             DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-        if algo == BestFirstSearch:
+            DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
+        elif algo == BestFirstSearch:
             BestFirstSearch.best_first(board, [], [0], Move(MoveType.EMPTY_MOVE))
 
         pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
         solution = algo.soulution
         solution = list(reversed(solution))
+        for move_and_state in solution:
+            print(f"{move_and_state[0].type.value} | {move_and_state[1]}")
         print("otrzymana solucja: ")
         print(solution)
         Order.id = 0
@@ -72,7 +76,6 @@ while True:
         animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
         sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
         pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(algo.name))
-
         for i in range(len(solution)):
             move = solution.pop()
             pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(algo.name, move))

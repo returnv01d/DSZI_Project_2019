@@ -21,10 +21,16 @@ class Table:
         self.sprite.update_status(self.status())
 
     def __repr__(self):
-        return "Table"
+        s = ""
+        for i, order in enumerate(self.orders):
+            s += f"table{self.id}_{i}:{1 if self.orders[i].is_delivered else 0} "
+        return s
 
     def __str__(self):
         return 'T'
+
+    def num(self):
+        return 3
 
     def status(self):
         statuses = ["id: " + str(self.id)]

@@ -17,6 +17,17 @@ class Board:
         self.kitchen = None
         self.tables = []
 
+    def __repr__(self):
+        s = "|Environment "
+        s += self.get_waiter_environment(3, 3)
+        #s += repr(self.waiter)
+        #s += repr(self.kitchen)
+        #s += "|Tables "
+        #for table in self.tables:
+            #s += repr(table)
+
+        return s
+
     def to_sprite_group(self, window_width, window_height):
         sprite_width = int(window_width / self.board_size)
         sprite_height = int(window_height / self.board_size)
@@ -138,3 +149,16 @@ class Board:
         # print("possible moves:")
         # print(self.get_possible_waiter_moves(move))
         return self
+
+    def get_waiter_environment(self, width, height):
+        env = ""
+        for i in range(2 * height + 1):
+            for j in range(2 * width + 1):
+                obj_pos_x = self.waiter.x - height + i
+                obj_pos_y = self.waiter.y - width + j
+                obj = self.object_at(obj_pos_x, obj_pos_y)
+                if width - i == 0 and height - j == 0:
+                    obj = self.waiter
+                env += f"{width - i}_{height - j}:{obj.num() if obj is not None else -1} "
+
+        return env

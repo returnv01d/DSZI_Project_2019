@@ -13,3 +13,6 @@ class Carpet:
 
     def __str__(self):
         return "C"
+
+    def num(self):
+        return 0

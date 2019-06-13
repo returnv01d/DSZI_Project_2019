@@ -18,10 +18,16 @@ class Kitchen:
         self.sprite.update_status(self.statuses())
 
     def __repr__(self):
-        return "Kitchen"
+        s = "|Kitchen "
+        for i, order in enumerate(self.orders):
+            s += f"order{i}:{order.table_id} "
+        return s
 
     def __str__(self):
         return 'K'
+
+    def num(self):
+        return 2
 
     def give_order(self, order):
         my_order = [ord for ord in self.orders if ord.id == order.id][0]
