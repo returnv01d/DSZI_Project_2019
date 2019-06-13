@@ -1,17 +1,15 @@
 10
-8 1
-4
-0 rosol
-1 bliny
-2 sernik
-2 kanapka
-F F F F F F F F C K
-F C C C C C C C C F
-C C F F F C F F C F
-F C T F F C F F C F
-F C F F F C T C C F
-F C F F C C F C F F
-F C F F C F F C C F
-F C C C C F F T C F
-F F F F C C C C C F
+6 2
+2
+0 gulasz
+1 sernik
+F F F F F F F F F F
+F F F F F F F F F F
+F F F T C C C K F F
+F F F F F F C F F F
+F F F F F F T F F F
+F F F F F F F F F F
+F F F F F F F F F F
+F F F F F F F F F F
+F F F F F F F F F F
 F F F F F F F F F F

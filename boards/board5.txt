@@ -1,0 +1,14 @@
+10
+9 0
+1
+0 rosol
+C C C C C C C C C C
+C F F F F F F F F K
+C F C C C C C C C C
+C F C F F F F F F C
+C F C F C C C C F C
+C F C F C T F C F C
+C F C F F F F C F C
+C F C C C C C C F C
+C F F F F F F F F C
+C C C C C C C C C C

@@ -108,6 +108,7 @@ class Board:
     def object_at(self, x, y):
         if x >= self.board_size or x < 0 or y >= self.board_size or y < 0:
             return None
+        # print("self.objects {0}, {1}".format(x, y))
 
         return self.objects[x][y]
 
@@ -154,11 +155,15 @@ class Board:
         env = ""
         for i in range(2 * height + 1):
             for j in range(2 * width + 1):
+                # print("-------------")
+                # print("i: {0} j: {1}".format(i, j))
+                # print(self.waiter.x, self.waiter.y)
                 obj_pos_x = self.waiter.x - height + i
                 obj_pos_y = self.waiter.y - width + j
                 obj = self.object_at(obj_pos_x, obj_pos_y)
-                if width - i == 0 and height - j == 0:
-                    obj = self.waiter
-                env += f"{width - i}_{height - j}:{obj.num() if obj is not None else -1} "
+
+                # print(obj)
+                # print(obj_pos_x, obj_pos_y)
+                env += f"{(-1)*(height - j)}_{width - i}:{obj.num() if obj is not None else -1} "
 
         return env

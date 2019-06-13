@@ -25,66 +25,74 @@ fpsClock = pygame.time.Clock()
 DISPLAYSURF = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 background_image = pygame.image.load('images/background_image.png')
 
+files = []
+files.append('boards/board1.txt')
+files.append('boards/board2.txt')
+files.append('boards/board3.txt')
+files.append('boards/board4.txt')
+files.append('boards/board5.txt')
+files.append('boards/board6.txt')
+files.append('boards/board7.txt')
+
 # IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
 # YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.
 # ADD YOU ALGORITHM CLASS HERE.
-algorithms = [DFS]
+
 
 print("hello in شروانشاه restaurant!!")
 
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == KEYDOWN:
-            if event.key == K_UP:
-                board.do(Move(MoveType.UP))
-            if event.key == K_DOWN:
-                board.do(Move(MoveType.DOWN))
-            if event.key == K_RIGHT:
-                board.do(Move(MoveType.RIGHT))
-            if event.key == K_LEFT:
-                board.do(Move(MoveType.LEFT))
-            if event.key == K_o:
-                board.do(Move(MoveType.TAKE_ORDER, first_order=board.kitchen.orders[-1]))
-            if event.key == K_p:
-                print(DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE)))
+testing_data = open("boards/testing_data.txt", "w")
 
-    for algo in algorithms:
-        board = BoardLoader.load_board_from_file('boards/new_board.txt')
+for file in files:
+    print()
+    board = None
+    solution = None
+    Order.id = 0
+    Table.id = 0
+    board = BoardLoader.load_board_from_file(file)
 
-        print()
-        print(repr(board))
+    DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE), "")
+    pygame.display.set_caption("Restaurant - doing {0}".format(DFS.name))
+
+    solution = DFS.soulution
+    print(solution)
+    solution = list(reversed(solution))
+    solution.pop()
+
+    Order.id = 0
+    Table.id = 0
+
+    DFS.found_solution = None
+    DFS.soulution = None
+
+    for move_and_state in solution:
+        testing_data.write(f"{move_and_state[0].type.value} |Possible_moves {move_and_state[1]}")
+        testing_data.write("\n")
+        print(f"{move_and_state[0].type.value} |Possible_moves {move_and_state[1]}")
+
+    print("otrzymana solucja: ")
+    print(solution)
 
 
-        if algo == DFS:
-            DFS.dfs(board, [], Move(MoveType.EMPTY_MOVE))
-        elif algo == BestFirstSearch:
-            BestFirstSearch.best_first(board, [], [0], Move(MoveType.EMPTY_MOVE))
+    animation_board = BoardLoader.load_board_from_file(file)
+    sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
+    pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(DFS.name))
 
-        pygame.display.set_caption("Restaurant - doing {0}".format(algo.name))
-        solution = algo.soulution
-        solution = list(reversed(solution))
-        for move_and_state in solution:
-            print(f"{move_and_state[0].type.value} | {move_and_state[1]}")
-        print("otrzymana solucja: ")
-        print(solution)
-        Order.id = 0
-        Table.id = 0
+    for i in range(len(solution)):
+        move = solution.pop()
+        move = move[0]
 
-        animation_board = BoardLoader.load_board_from_file('boards/new_board.txt')
-        sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-        pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(algo.name))
-        for i in range(len(solution)):
-            move = solution.pop()
-            pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(algo.name, move))
-            animation_board.do(move)
-            time.sleep(STEP_TIME)
+        print(move)
+        pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(DFS.name, move))
+        animation_board.do(move)
+        time.sleep(STEP_TIME)
 
-            DISPLAYSURF.blit(background_image, (0, 0))
-            sprites.draw(DISPLAYSURF)
-            pygame.display.flip()
-            fpsClock.tick(FPS)
-        time.sleep(1.0)
+        DISPLAYSURF.blit(background_image, (0, 0))
+        sprites.draw(DISPLAYSURF)
+        pygame.display.flip()
+        fpsClock.tick(FPS)
+    time.sleep(1.0)
 
+
+
+testing_data.close()

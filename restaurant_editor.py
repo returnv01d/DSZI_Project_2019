@@ -33,7 +33,7 @@ print("hello in شروانشاه restaurant!!")
 
 DISPLAYSURF.blit(background_image, (0,0))
 
-new_object = Table()
+new_object = None
 
 while True: # the main game loop
     for event in pygame.event.get():
@@ -42,7 +42,7 @@ while True: # the main game loop
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_t:
-                new_object = Table()
+                new_object = Table(0, 0)
             elif event.key == pygame.K_k:
                 new_object = Kitchen([])
 

@@ -1,16 +1,17 @@
 10
-6 2
-3
-0 gulasz
-1 budyn
-2 kawa
-F F F F C W C C C K
-F F F F F F F C F F
-F F T F F F F C F F
-F F C F F F C C F F
-F F C C C C C F F F
-F F F C F F F F F F
-F F T C F F C C F F
-F F C C F F C F F F
-F F C C C C C F F F
-F F F F F T F F F F
+8 1
+4
+0 rosol
+1 bliny
+2 sernik
+3 kanapka
+F F F F F F F F F F
+F F F F F F F F C F
+F F F F F F F F C F
+F F F F F T C C C T
+F F F T C C F F C F
+F F F F F C C C C F
+F F F F F T F F K F
+F F F F F F F F F F
+F F F F F F F F F F
+F F F F F F F F F F
