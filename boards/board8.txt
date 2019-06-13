@@ -1,8 +1,10 @@
 10
 6 2
-2
+4
 0 bliny
-1 rodzynk
+1 rodzynki
+0 kawa
+1 herbata
 F F C F C F C C C K
 F F C F C F C F C F
 F F C F C F C F C F

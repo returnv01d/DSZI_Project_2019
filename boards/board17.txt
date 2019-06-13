@@ -1,0 +1,17 @@
+10
+0 7
+4
+0 rosol
+1 bliny
+2 sernik
+3 kanapka
+F F C F F F F C T F
+F T C F F F F C F F
+C C C F F C C C C C
+F F C F F C F F F F
+F F C C C C K F F F
+F F F F F C C C C C
+F F F F F C F F F F
+C C C C C C C F F T
+F C T F F F C C C C
+F C F F F F F F F F

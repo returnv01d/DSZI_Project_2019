@@ -1,0 +1,19 @@
+10
+6 2
+6
+0 rosol
+1 bliny
+2 sernik
+0 rosol
+1 bliny
+2 sernik
+F F C F F F C C C C
+F F C C C F C F F C
+F F F F C C C F C C
+F F F F C F F F F F
+T C C C C C C C K F
+F F F F C F F C F F
+F C C C C F F C C C
+F C F F F T C C F F
+F T F F F F F C F F
+F F F F F F F F F F

@@ -1,9 +1,15 @@
 10
 6 2
-2
+8
 0 bliny
-1 rodzynk
-F F C F C F C C C K
+1 rodzynki
+2 zupa
+3 banany
+0 coca-cola
+1 kawa
+2 herbata
+3 piwo
+F T C F C F C C C K
 F F C F C F C F C F
 F F C F C F C F C F
 F F C F C F C F C F
@@ -11,5 +17,5 @@ F F C F C F C F C F
 F F C F C F C F C F
 F F C F C F C F C F
 F F C F C F C F C F
-F F C F C T C T C F
+F F C T C T C T C F
 F F C C C C C F C F

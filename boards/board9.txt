@@ -1,9 +1,10 @@
 10
 6 2
-2
+3
 0 bliny
-1 rodzynk
-F F C F C F C C C K
+1 rodzynki
+2 kawa
+F T C F C F C C C K
 F F C F C F C F C F
 F F C F C F C F C F
 F F C F C F C F C F

@@ -1,0 +1,23 @@
+10
+0 0
+10
+0 bliny
+1 rodzynki
+2 zupa
+3 banany
+4 rosol
+0 coca-cola
+1 kawa
+2 herbata
+3 piwo
+4 pomidorowa
+C C F F F F F F C T
+T C F F F F F F C F
+F C F F F F C C C F
+F C C C C K C F C F
+F F F T C C C F C F
+F C C C C F F F C F
+F C F F F C C C C F
+F C F F F C F F F T
+T C F F F C C C C C
+C C F F F F F F F F

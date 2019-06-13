@@ -27,12 +27,26 @@ background_image = pygame.image.load('images/background_image.png')
 
 files = []
 files.append('boards/board1.txt')
-files.append('boards/board2.txt')
 files.append('boards/board3.txt')
+files.append('boards/board2.txt')
 files.append('boards/board4.txt')
 files.append('boards/board5.txt')
 files.append('boards/board6.txt')
 files.append('boards/board7.txt')
+files.append('boards/board8.txt')
+files.append('boards/board9.txt')
+files.append('boards/board10.txt')
+files.append('boards/board11.txt')
+files.append('boards/board12.txt')
+files.append('boards/board13.txt')
+files.append('boards/board14.txt')
+files.append('boards/board15.txt')
+files.append('boards/board16.txt')
+files.append('boards/board17.txt')
+files.append('boards/board18.txt')
+files.append('boards/board19.txt')
+files.append('boards/board20.txt')
+
 
 # IMPORTANT! READ BEFORE ADDING YOUR ALGORITHM. ADD YOUR ALGORITHM CLASS, NOT FUNCTION.
 # YOUR CLASS SHOULD HAVE "NAME" FIELD AND "SOLUTION" FIELD WHERE YOU MUST PUT YOUR LIST WITH SOLUTION MOVES.

@@ -1,13 +1,13 @@
 10
 6 2
 0
-F T C F C F C C C K 
-F F C F C F C F C F 
-F F C F C F C F C F 
-F F C F C F C F C F 
-F F C F C F C F C F 
-F F C F C F C F C F 
-F F C F C F C F C F 
-F F C F C F C F C F 
-F F C T C T C T C F 
-F F C C C C C F C F 
+C C F F F F F F C T 
+T C F F F F F F C F 
+F C F F F F C C C F 
+F C C C C K C F C F 
+F F F T C C C F C F 
+F C C C C F F F C F 
+F C F F F C C C C F 
+F C F F F C F F F T 
+T C F F F C C C C C 
+C C F F F F F F F F 

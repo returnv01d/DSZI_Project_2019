@@ -1,0 +1,21 @@
+10
+3 4
+8
+0 rosol
+1 bliny
+2 sernik
+3 kanapka
+0 rosol
+1 bliny
+2 sernik
+3 kanapka
+F F F F C F F F F F
+F F T F C F T F F F
+C C C C C C C F F F
+F F C F F F C C C C
+C C C C C K F F F F
+F F C F F F C F F F
+C C C C C C C C C C
+F F T F C F T F F F
+F F F F C F F F F F
+F F F F C F F F F F
