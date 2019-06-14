@@ -47,7 +47,8 @@ while True:
             state = ""
             for i, movee in enumerate(board.get_possible_waiter_moves(previous_move)):
                 if str(movee.type.value) not in state:
-                    state += f"{movee.type.value} "
+                    state += f"{movee.type.value + 1} "
+            state + repr(board.waiter)
             state += repr(board)
             state += "\n"
             print(state)
@@ -55,11 +56,13 @@ while True:
             print("wyslano")
             data = s.recv(1024).strip()
 
-            print('Received', repr(data))
+            print('Received', repr(int(data)))
+            move = [move for move in possible_moves if move.type.value == (int(data) - 1)][0]
+            print(move)
             sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-            #pygame.display.set_caption(f"Restaurant - vowpal doing {move_counter} move: {move}")
+            pygame.display.set_caption(f"Restaurant - vowpal doing {move_counter} move: {move}")
 
-            #board.do(move)
+            board.do(move)
 
             time.sleep(STEP_TIME)
             DISPLAYSURF.blit(background_image, (0, 0))
