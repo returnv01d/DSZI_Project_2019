@@ -8,10 +8,10 @@ class DFS:
     def dfs(board, current_solution, previous_move, state, depth=0):
 
         if depth > 1000:
-            print("przekroczono maksymalną głebokosc")
+            # print("przekroczono maksymalną głebokosc")
             return
         if DFS.found_solution:
-            print("znaleziono juz gdzies rozwiązanie, ucinamy szukające wciąż rozwiązania dfsy")
+            # print("znaleziono juz gdzies rozwiązanie, ucinamy szukające wciąż rozwiązania dfsy")
             return
         # print()
         # print("dfs {0}.all orders served? {1}".format(str(depth), board.all_orders_served()))
