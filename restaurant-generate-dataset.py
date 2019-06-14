@@ -38,11 +38,11 @@ testing_data = open("boards/testing_data.txt", "w")
 directory = os.fsencode("data_learning_boards")
 
 
-# for file in os.listdir(directory):
-#     filenam = os.fsdecode(file)
-#     paths.append(filenam)
+for file in os.listdir(directory):
+    filenam = os.fsdecode(file)
+    paths.append(filenam)
 
-paths = ['board28.txt']
+
 print(paths)
 paths.sort(key=natural_keys)
 for filename in paths:
@@ -66,37 +66,37 @@ for filename in paths:
 
     DFS.found_solution = None
     DFS.soulution = None
-
+    solution.pop(0)
     for move_and_state in solution:
-        testing_data.write(f"{move_and_state[0].type.value + 1} |Possible_moves {move_and_state[1]}")
+        testing_data.write(f"{move_and_state[0].type.value + 1} '{filename} |Possible_moves {move_and_state[1]}")
         testing_data.write("\n")
         # print(f"{move_and_state[0].type.value} |Possible_moves {move_and_state[1]}")
 
     print("otrzymana solucja: ")
     print(solution)
 
-    solution = list(reversed(solution))
-    solution.pop()
+    # solution = list(reversed(solution))
+    # solution.pop()
 
 
-    animation_board = BoardLoader.load_board_from_file("data_learning_boards" + os.sep + filename)
-    sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
-    pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(DFS.name))
-
-    for i in range(len(solution)):
-        move = solution.pop()
-        move = move[0]
-
-        print(move)
-        pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(DFS.name, move))
-        animation_board.do(move)
-        time.sleep(STEP_TIME)
-
-        DISPLAYSURF.blit(background_image, (0, 0))
-        sprites.draw(DISPLAYSURF)
-        pygame.display.flip()
-        fpsClock.tick(FPS)
-    time.sleep(0.2)
+    # animation_board = BoardLoader.load_board_from_file("data_learning_boards" + os.sep + filename)
+    # sprites = animation_board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
+    # pygame.display.set_caption("Restaurant - finished {0}. Doing solution...".format(DFS.name))
+    #
+    # for i in range(len(solution)):
+    #     move = solution.pop()
+    #     move = move[0]
+    #
+    #     print(move)
+    #     pygame.display.set_caption("Restaurant - finished {0}. Doing solution....Current move: {1}".format(DFS.name, move))
+    #     animation_board.do(move)
+    #     time.sleep(STEP_TIME)
+    #
+    #     DISPLAYSURF.blit(background_image, (0, 0))
+    #     sprites.draw(DISPLAYSURF)
+    #     pygame.display.flip()
+    #     fpsClock.tick(FPS)
+    # time.sleep(0.2)
 
 
 

@@ -22,7 +22,7 @@ class Waiter:
         self.sprite.rect.y = self.sprite.rect.height * self.x
 
     def __repr__(self):
-        return f"|Waiter ordersCount:{len(self.heldOrders)}"
+        return f"|Waiter ordersCount:{len(self.heldOrders)} "
 
     def num(self):
         return 4

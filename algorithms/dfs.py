@@ -17,16 +17,16 @@ class DFS:
         # print("dfs {0}.all orders served? {1}".format(str(depth), board.all_orders_served()))
 
         state += repr(board)
-        state += repr(board.waiter)
+
         new_solution = list(current_solution)
         new_solution.append([previous_move, state])
 
         state = ""
         for i, movee in enumerate(board.get_possible_waiter_moves(previous_move)):
-            if str(movee.type.value) not in state:
-                state += f"{movee.type.value} "
+            if str(movee.type.value + 1) not in state:
+                state += f"{movee.type.value + 1} "
 
-
+        state += repr(board.waiter)
         if board.all_orders_served():
             # new_solution.append([previous_move, state])
             # print("returning solution:")
