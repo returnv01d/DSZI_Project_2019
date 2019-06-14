@@ -1,5 +1,5 @@
 10
-7 4
+1 4
 2
 0 rosol
 1 bliny
@@ -7,7 +7,7 @@ F F F F T F F F F F
 F F F F C F F F F F
 F F F F C F F F F F
 F F F F C F F F F F
-T C C C C C C C C K
+K C C C C C C C C T
 F F F F F F F F F F
 F F F F F F F F F F
 F F F F F F F F F F

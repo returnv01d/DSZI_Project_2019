@@ -1,15 +1,16 @@
 10
 7 4
-2
+3
 0 rosol
 1 bliny
+2 sernik
 F F F F T F F F F F
 F F F F C F F F F F
 F F F F C F F F F F
 F F F F C F F F F F
 T C C C C C C C C K
-F F F F F F F F F F
-F F F F F F F F F F
-F F F F F F F F F F
-F F F F F F F F F F
-F F F F F F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F T F F F F F

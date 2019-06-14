@@ -29,7 +29,7 @@ files = []
 files.append('boards/board1.txt')
 files.append('boards/board3.txt')
 files.append('boards/board2.txt')
-files.append('boards/board4.txt')
+files.append('boards/board4-5.txt')
 files.append('boards/board5.txt')
 files.append('boards/board6.txt')
 files.append('boards/board7.txt')
@@ -80,7 +80,7 @@ for file in files:
     DFS.soulution = None
 
     for move_and_state in solution:
-        testing_data.write(f"{move_and_state[0].type.value} |Possible_moves {move_and_state[1]}")
+        testing_data.write(f"{move_and_state[0].type.value + 1} |Possible_moves {move_and_state[1]}")
         testing_data.write("\n")
         print(f"{move_and_state[0].type.value} |Possible_moves {move_and_state[1]}")
 

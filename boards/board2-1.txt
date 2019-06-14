@@ -1,14 +1,14 @@
 10
-4 1
+4 8
 1
 0 rosol
-F F F F K F F F F F
-F F F F C F F F F F
-F F F F C F F F F F
-F F F F C F F F F F
-F F F F C F F F F F
-F F F F C F F F F F
-F F F F C F F F F F
-F F F F C F F F F F
 F F F F T F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F C F F F F F
+F F F F K F F F F F
 F F F F F F F F F F
