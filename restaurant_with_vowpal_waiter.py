@@ -28,7 +28,6 @@ background_image = pygame.image.load('images/background_image.png')
 
 PORT = 26542
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# now connect to the web server on port 80 - the normal http port
 s.connect(("localhost", PORT))
 while True:
     for event in pygame.event.get():
@@ -37,33 +36,36 @@ while True:
             sys.exit()
 
 
-        board = BoardLoader.load_board_from_file('boards/new_board.txt')
+        board = BoardLoader.load_board_from_file('data_learning_boards/board1.txt')
         Order.id = 0
         Table.id = 0
         move_counter = 0
         previous_move = Move(MoveType.EMPTY_MOVE)
         while not board.all_orders_served():
             possible_moves = board.get_possible_waiter_moves(previous_move)
+            print(possible_moves)
             state = ""
             for i, movee in enumerate(board.get_possible_waiter_moves(previous_move)):
-                if str(movee.type.value) not in state:
+                if str(movee.type.value + 1) not in state:
                     state += f"{movee.type.value + 1} "
             state + repr(board.waiter)
             state += repr(board)
             state += "\n"
-            print(state)
+            print(f"state: {state}")
             s.send(bytes(f"{state}", 'utf-8'))
             print("wyslano")
             data = s.recv(1024).strip()
 
-            print('Received', repr(int(data)))
-            move = [move for move in possible_moves if move.type.value == (int(data) - 1)][0]
+            print('Received', repr(data))
+            data = int(data) - 1
+            print(f"converted: {data}")
+            move = [move for move in possible_moves if move.type.value == data][0]
             print(move)
             sprites = board.to_sprite_group(WINDOW_WIDTH, WINDOW_HEIGHT)
             pygame.display.set_caption(f"Restaurant - vowpal doing {move_counter} move: {move}")
 
             board.do(move)
-
+            previous_move = move
             time.sleep(STEP_TIME)
             DISPLAYSURF.blit(background_image, (0, 0))
             sprites.draw(DISPLAYSURF)
