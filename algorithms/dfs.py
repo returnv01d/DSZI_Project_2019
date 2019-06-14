@@ -17,6 +17,7 @@ class DFS:
         # print("dfs {0}.all orders served? {1}".format(str(depth), board.all_orders_served()))
 
         state += repr(board)
+        state += repr(board.waiter)
         new_solution = list(current_solution)
         new_solution.append([previous_move, state])
 
